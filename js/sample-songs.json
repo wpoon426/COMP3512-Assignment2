@@ -1,3 +1,4 @@
+const sampSongs = `
 [{
 		"song_id": 1167,
 		"title": "Alarm",
@@ -132,5 +133,32 @@
 			"acousticness": 0,
 			"speechiness": 5
 		}
+	},
+	{
+		"song_id": 1171,
+		"title": "Sorry",
+		"year": 2010,
+		"artist": {
+			"id": 17,
+			"name": "Beyoncé"
+		},
+		"genre": {
+			"id": 110,
+			"name": "dance pop"
+		},
+		"details": {
+			"duration": 233,
+			"bpm": 130,
+			"popularity": 72,
+			"loudness": -7
+		},
+		"analytics": {
+			"energy": 60,
+			"danceability": 78,
+			"liveness": 25,
+			"valence": 36,
+			"acousticness": 0,
+			"speechiness": 5
+		}
 	}
-]
+]`;

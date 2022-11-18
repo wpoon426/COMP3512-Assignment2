@@ -14,57 +14,56 @@ const api = 'http://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.p
 
 
 //list out artist names
+document.write("<h1>artists</h1>");
 const art = JSON.parse(artists);
 for (let a of art) {
-   console.log(a.name);
+   document.write(a.name+ "<br>");
 }
 console.log('---------------------------------------------------------------');
 
 //list out genres
+document.write("<h1>genres</h1>");
 const gen = JSON.parse(genres);
 for (let g of gen) {
-   console.log(g.name);
+   document.write(g.name + "<br>");
 }
 console.log('---------------------------------------------------------------');
+
 
 //list out song list 
 const samp = JSON.parse(sampSongs);
 
 //sort by title
-console.log(samp.sort((a, b) => a.title.localeCompare(b.title)));
-console.log('....................');
+document.write("<h1>title sort</h1>");
+const sortTitle = samp.sort((a, b) => a.title.localeCompare(b.title));
+for (let s of sortTitle) {
+   document.write(s.title + "<br>");
+}
+
 
 //sort by artist name 
-console.log(samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name)));
-console.log('....................');
+document.write("<h1>artist sort</h1>");
+const artistName = samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
+for (let s of artistName) {
+   document.write(s.artist.name + "<br>");
+}
+
 
 //sort by year 
-console.log(samp.sort((a, b) => a.year - b.year));
-samp.sort(function(a,b){
-   return a.year - b.year;
-});
-console.log(samp);
-//console.log(samp.sort((a, b) =>  { return a.year-b.year;}));
-console.log('....................');
+document.write("<h1>year sort</h1>");
+let sortField = "year";
+const sortedYear = samp.sort((a,b) => a.year < b.year?-1:1);
+for (let s of sortedYear) {
+   document.write(s.year + "<br>");
+}
 
 //sort by genre
 console.log(samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name)));
 console.log('....................');
 
 //sort by popularity
-console.log(samp.sort((a, b) => a.title.localeCompare(b.title)));
-console.log('....................');
+const popSort = samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
+console.log(popSort);
 
-
-/*
-for (let ss of samp) {
-   console.log(ss.title);
-   console.log(ss.artist.name);
-   console.log(ss.year);
-   console.log(ss.genre.name);
-   console.log(ss.details.popularity);
-   console.log('....................')
-}
-*/
 
 

@@ -58,11 +58,19 @@ for (let s of sortedYear) {
 }
 
 //sort by genre
-console.log(samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name)));
+document.write("<h1>genre</h1>");
+const genre = samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name));
+for (let s of genre) {
+   document.write(s.genre.name + "<br>");
+}
 console.log('....................');
 
 //sort by popularity
+document.write("<h1>popularity</h1>");
 const popSort = samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
+for (let s of popSort) {
+   document.write(s.details.popularity + "<br>");
+}
 console.log(popSort);
 
 

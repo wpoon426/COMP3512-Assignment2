@@ -1,3 +1,8 @@
 .hidden{
     display:none;
 }
+
+
+table { 
+    border: solid black 1px;
+}

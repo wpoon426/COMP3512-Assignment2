@@ -75,3 +75,20 @@ console.log(popSort);
 
 
 
+const title = document.querySelector('#info');
+const resultTitle = samp.sort((a, b) => a.title.localeCompare(b.title));
+for (let s of sampSongs) {
+   //document.write(s.title + "<br>");
+
+   let td = document.write('td');
+   td.textContent = s.title;
+   title.appendChild(td);
+   
+  
+
+
+
+
+}
+
+

@@ -1,8 +1,22 @@
+document.addEventListener("DOMContentLoaded", () => {
+   // checks too see if the song data exists in localstorage and if it does not then it will get the songs from the url and put them into a JSON object
+   if (!localStorage.getItem("songs")) {
+       const api = "https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php";
+       fetch(api)
+           .then(res => res.json())
+           .then(data => {
+               loadSongs(data)
+           })
+   }
 
 
 
-/* url of song api --- https versions hopefully a little later this semester */	
-const api = 'http://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php';
+
+
+   function loadSongs(data) {
+      console.log(data);
+      localStorage.setItem("songs", JSON.stringify(data));
+  }
 
  
 
@@ -224,6 +238,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+
+});
 
 
 });

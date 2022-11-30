@@ -144,8 +144,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
    const title = document.querySelector('.info');
+   
 
    const sorted = samp.sort((a, b) => a.title.localeCompare(b.title));
+   const artistSort = samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
 
    
    for (let s of sorted) {
@@ -178,25 +180,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+   
    //const sorted = samp.sort((a, b) => a.title.localeCompare(b.title));
    const arr = document.querySelector('.artists');
    
-   for (let s of sorted) {
+   for (let s of artistSort) {
       //makes tr, td
-     // let tr = document.createElement('tr');
+      let tr = document.createElement('tr');
       let td = document.createElement('td');
 
       //set text for td
-      td.innerHTML = s.title;
+      td.innerHTML = s.artist.name;
+      
       
       //put td into tr
-      //tr.appendChild(td);
+      tr.appendChild(td);
       
       //put tr to the main tr
       arr.appendChild(td);
-
+      
 
    }
+
+   
+   
+
 
 
 

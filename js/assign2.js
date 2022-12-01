@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-makeTable(sampSongs);
+//makeTable(sampSongs);
 
 /*
 function makeTable(songs) {
@@ -299,6 +299,43 @@ document.addEventListener("DOMContentLoaded", function() {
    }
 */
    
+/*Doing shit from the video*/
+
+let btnGet = document.querySelector('button');
+let myTable = document.querySelector('#table');
+
+let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
+
+btnGet.addEventListener('click', () => {
+   let table = document.createElement('table');
+   let headerRow = document.createElement('tr');
+
+   headers.forEach(headerText => {
+      let header = document.createElement('th');
+      let textNode = document.createTextNode(headerText);
+      header.appendChild(textNode);
+      headerRow.appendChild(header);
+
+   });
+
+   table.appendChild(headerRow);
+
+   samp.forEach(s => {
+      let row = document.createElement('tr');
+
+      Object.values(s).forEach(text => {
+         let cell = document.createElement('td');
+         cell.innerHTML = s.title;
+         //let textNode = document.createTextNode(text);
+         //cell.appendChild(textNode);
+         row.appendChild(cell);
+      })
+
+      table.appendChild(row);
+   })
+
+   myTable.appendChild(table);
+});
    
 
 

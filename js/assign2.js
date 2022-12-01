@@ -176,8 +176,8 @@ function makeTable(songs) {
   
 
    let column = document.querySelector('#table');
-
-   sortCalc(samp);
+   const titleSort = samp.sort((a, b) => a.title.localeCompare(b.title));
+   sortCalc(titleSort);
 
 
 
@@ -190,17 +190,17 @@ function makeTable(songs) {
       let popSelect = document.querySelector('#Popularity');
 
       if(e.target == titleSelect){
-         const titleSort = samp.sort((a, b) => a.title.localeCompare(b.title));
+         samp.sort((a, b) => a.title.localeCompare(b.title));
          titleSelect.addEventListener('click', updateButton); 
       }else if (e.target == artSelect){
-         const artistSort = samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
+         samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
 
       }else if (e.target == yearSelect){
-         const yearSort = samp.sort((a,b) => a.year < b.year?-1:1);
+         samp.sort((a,b) => a.year < b.year?-1:1);
       }else if (e.target == genSelect){
-         const genreSort = samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name));
+         samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name));
       }else if (e.target == popSelect){
-         const popSort = samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
+         samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
       }
                
       

@@ -17,90 +17,47 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  let arr = [];
-  if (!localStorage.getItem("arr")) {
+   let arr = [];
+   if (!localStorage.getItem("arr")) {
       localStorage.setItem("arr", []);
-  } else {
+   } else {
       arr = JSON.parse(localStorage.getItem("arr"));
       console.log('initial playlist', arr);
-  }
+   }
  
 
 
-  const samp = JSON.parse(localStorage.getItem("song")); //|| JSON.parse(sampSongs);
-  const art = JSON.parse(artists);
-  const gen = JSON.parse(genres); 
-  console.log("songs object", samp);
-  console.log("sessionStorage", sessionStorage);
-  let sort = "title";
+   const samp = JSON.parse(localStorage.getItem("song")); //|| JSON.parse(sampSongs);
+   const art = JSON.parse(artists);
+   const gen = JSON.parse(genres); 
+   console.log("songs object", samp);
+   console.log("sessionStorage", sessionStorage);
+   let sort = "title";
 
 
 
   function listOutput(title, parent) {
-
-   const opt = document.createElement("option");
-   opt.value = title;
-   opt.textContent = title;
-   parent.appendChild(opt);
+      const opt = document.createElement("option");
+      opt.value = title;
+      opt.textContent = title;
+      parent.appendChild(opt);
    }
 
-
-
-      samp.forEach(song => {
+   samp.forEach(song => {
       listOutput(song.title, document.getElementById("titleSearch"));
 
    })
 
-      art.forEach((artist) => {
+   art.forEach((artist) => {
       listOutput(artist.name, document.getElementById("artistSearch"));
 
    });
 
-      gen.forEach((genre) => {
+   gen.forEach((genre) => {
       listOutput(genre.name, document.getElementById("genreSearch"));
-
    });
 
-//makeTable(sampSongs);
 
-/*
-function makeTable(songs) {
-   const big = document.getElementById("song-table"); 
-   const tr = document.createElement("tr");
-   tr.setAttribute("songID", songs.song_id);
-   const tdTitle = document.createElement("td");
-   tdTitle.classList.add("songTitle");
-   tdTitle.textContent = songs.title;
-   tr.appendChild(tdTitle);
-}
-*/
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
- 
 
 /* note: you may get a CORS error if you try fetching this locally (i.e., directly from a
    local file). To work correctly, this needs to be tested on a local web server.  
@@ -109,82 +66,14 @@ function makeTable(songs) {
 */
 
 
-// //list out artist names
-// document.write("<h1>artists</h1>");
-// const art = JSON.parse(artists);
-// for (let a of art) {
-//    document.write(a.name+ "<br>");
-// }
-// console.log('---------------------------------------------------------------');
-
-// //list out genres
-// document.write("<h1>genres</h1>");
-// const gen = JSON.parse(genres);
-// for (let g of gen) {
-//    document.write(g.name + "<br>");
-// }
-// console.log('---------------------------------------------------------------');
 
 
-//list out song list 
-//const samp = JSON.parse(sampSongs);
-
-// //sort by title
-// document.write("<h1>title sort</h1>");
-
-// for (let s of sortTitle) {
-//    document.write(s.title + "<br>");
-// }
-
-
-// //sort by artist name 
-// document.write("<h1>artist sort</h1>");
-// for (let s of artistName) {
-//    document.write(s.artist.name + "<br>");
-// }
-
-// //sort by year 
-// document.write("<h1>year sort</h1>");
-// let sortField = "year";
-
-// for (let s of sortedYear) {
-//    document.write(s.year + "<br>");
-// }
-
-// //sort by genre
-// document.write("<h1>genre</h1>");
-
-// for (let s of genre) {
-//    document.write(s.genre.name + "<br>");
-// }
-// console.log('....................');
-
-// //sort by popularity
-// document.write("<h1>popularity</h1>");
-
-// for (let s of popSort) {
-//    document.write(s.details.popularity + "<br>");
-// }
-// console.log(popSort);
-
-
-//loading titles
+   //loading tables
    const table = document.querySelector('#table');
-
-   //const resultTitle = samp.sort((a, b) => a.title.localeCompare(b.title));
-
-  
 
    let column = document.querySelector('#table');
    const titleSort = samp.sort((a, b) => a.title.localeCompare(b.title));
    sortCalc(titleSort);
-
-const symbolSort = '******';
-
-function updateButton() { 
-      const icon = symbolSort; 
-      titleSelect.textContent = icon; 
-} 
 
    column.addEventListener('click', function(e){
          
@@ -196,10 +85,8 @@ function updateButton() {
 
       if(e.target == titleSelect){
          samp.sort((a, b) => a.title.localeCompare(b.title));
-         //titleSelect.addEventListener('click', updateButton); 
       }else if (e.target == artSelect){
          samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
-
       }else if (e.target == yearSelect){
          samp.sort((a,b) => a.year < b.year?-1:1);
       }else if (e.target == genSelect){
@@ -208,12 +95,63 @@ function updateButton() {
          samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
       }
                
-      
       sortCalc(samp);
-
-
    });
 
+
+
+   // const playlistCol = document.querySelectorAll('#Playlist');
+
+   // for(let p of playlistCol){
+
+
+   // }
+
+   const added = [];
+
+   const button = document.querySelectorAll('.addBtn');
+
+   for(let b of button){
+      
+         b.addEventListener('click',function(e){
+
+            let a = b.getAttribute('id');
+            alert(a);
+            added.push(b);
+
+            console.log(added);
+
+         });
+      }
+
+      
+
+   for (const addButton of button) {
+      addButton.addEventListener("click", () => {
+        let product = samp.find(p => p.Id == addButton.dataset.product);
+        cart.push(product);
+        amountLabel.innerText = cart.length + "items";
+      });  
+
+   // }
+
+   // for(let i = 0; i < button.length; i++){
+      
+   //    button[i].addEventListener('click',function(e){
+
+   //       //let x = button[i].getAttribute('id');
+   //       if (e.target == button[i]){
+
+   //          let a = button[i].getAttribute('id');
+   //          alert(a);
+   //          added.push(button);
+   
+   //          console.log(added);
+   //       }
+            
+   
+   //       });
+   //    }
 
 
 
@@ -247,7 +185,6 @@ function sortCalc(sortWay){
       td2.innerHTML = s.artist.name;
       tr.appendChild(td2);
          
-         
       let td3 = document.createElement('td');
 
       td3.innerHTML = s.year;
@@ -257,18 +194,37 @@ function sortCalc(sortWay){
 
       td4.innerHTML = s.genre.name;
       tr.appendChild(td4);
-         
-         
+        
       let td5 = document.createElement('td');
 
       td5.innerHTML = s.details.popularity;
       tr.appendChild(td5);
          
+      let btn = document.createElement('button');
+   
+      btn.setAttribute('id',s.song_id);
+      btn.setAttribute('class','addBtn');
+      btn.textContent = 'Add';
+      tr.appendChild(btn);
+
       table.appendChild(tr);
    }
 
    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });
 

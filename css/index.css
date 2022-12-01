@@ -25,3 +25,25 @@ th, td {
     border: 1px solid black;
     padding: 5px;
 } */
+
+#Title:active {
+    background-color: aqua;
+}
+
+#Artist:active {
+    background-color: blueviolet;
+}
+
+#Genre:active {
+    background-color: cornflowerblue
+}
+
+#Year:active {
+    background-color: red
+}
+
+#Popularity:active {
+    background-color: green;
+}
+
+

@@ -111,27 +111,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
    const button = document.querySelectorAll('.addBtn');
 
-   for(let b of button){
+   // for(let b of button){
       
-         b.addEventListener('click',function(e){
+   //       b.addEventListener('click',function(e){
 
-            let a = b.getAttribute('id');
-            alert(a);
-            added.push(b);
+   //          let a = b.getAttribute('id');
+   //          alert(a);
+   //          added.push(b);
 
-            console.log(added);
+   //          console.log(added);
 
-         });
-      }
+   //       });
+   //    }
 
       
 
    for (const addButton of button) {
       addButton.addEventListener("click", () => {
         let product = samp.find(p => p.Id == addButton.dataset.product);
-        cart.push(product);
-        amountLabel.innerText = cart.length + "items";
-      });  
+        added.push(product);
+        //amountLabel.innerText = added.length + "items";
+        console.log(added);
+      });
+   };  
 
    // }
 

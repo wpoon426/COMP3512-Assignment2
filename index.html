@@ -20,60 +20,78 @@
 
     <article id="searchView">
         <!--artist and genre select lists -->
-
-        <table class="result"> 
-            <tr>
-                <th>Title</th> 
-                <th>Artists</th>
-                <th>Year</th>
-                <th>Genre</th>
-                <th>Popularity</th>
-                
-            </tr>
-
-
-            <tr class="info">
-                <!-- <tr id="ww"><td>ww</td></tr>
-                <tr id="wwa"><td>ww</td></tr>
-                <tr id="wwb"><td>ww</td></tr>
-                <td id="ww">www</td><td id="ww">www</td><td id="ww">www</td> -->
-                <!-- <td>Jill</td>
-                  <td>Smith</td>
-                  <td>50</td> -->
-
-            </tr>
-
-            <tr class="artists">
-                <!-- <tr ><td>ww</td></tr>
-                <tr><td>ww</td></tr>
-                <tr ><td>ww</td></tr> -->
-            </tr>
+      <div class="searchSelect">
+        <form>
+          <label>Basic Song Search</label>
+          <select name="type" id="filter-type">
+            <option value="Title">Title</option>
+            <option value="Artist">Artist</option>
+            <option value="Genre">Genre</option>
+          </select>
+        </form>
 
 
+        <form>
+          <div class="filter">
+            <label for="title">Title</label>
+            <input list="titleSearch">
+            <datalist id="titleSearch"></datalist>
+          </div>
 
+          <div class="hiddenFilter">
+            <label for="artist">Artist</label>
+            <select id="artistSearch" name="artists" >
+              <option value="" disabled hidden selected></option>
+            </select>
+          </div>
 
-            <table>
-                <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Age</th>
-                </tr>
-                <tr>
-                  <td>Jill</td>
-                  <td>Smith</td>
-                  <td>50</td>
-                </tr>
-                <tr>
-                  <td>Eve</td>
-                  <td>Jackson</td>
-                  <td>94</td>
-                </tr>
-              </table>
+          <div class="hiddenFilter">
+            <label for="genre">Genre</label>
+            <select id="genreSearch" name="gen" >
+              <option value="" disabled hidden selected></option>
+            </select>
+          </div>
 
-        </table>
+          <div id="buttons">
+            <button type="submit" id="filter-button" class="btn">Filter</button>
+            <button type="submit" id="clear-button" class="btn">Clear</button>
+          </div>
+        </form>
+      </div>
+        
+
+        <div class="tableCont">
+          <table class="view">
+              <thead>
+                  <th id="title-table">
+                      Title
+                  </th>
+                  <th id="artist-table">
+                      Artist 
+                  </th>
+                  <th id="year-table">
+                    Year 
+                  <th id="genre-table">
+                      Genre 
+                  </th>
+                  <th id="pop-table">
+                      Popularity 
+                  </th>
+                  <th>
+                      Playlist
+                  </th>
+                  
+              </thead>
+              <tbody id="song-table"></tbody>
+          </table>
+      </div>
+
+        
         
 
     </article>
+
+
     <article id="songView" class="hidden">
 
     </article>
@@ -81,10 +99,6 @@
 
     </article>
 
-    <article class="basicSongSearch">
-
-
-    </article>
 
 
 

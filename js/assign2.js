@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-   // checks too see if the song data exists in localstorage and if it does not then it will get the songs from the url and put them into a JSON object
+   // checks too see if the song data exists in localstorage and 
+   //if it does not then it will get the songs from the url and put them into a JSON object
    if (!localStorage.getItem("songs")) {
        const api = "https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php";
        fetch(api)
@@ -10,13 +11,94 @@ document.addEventListener("DOMContentLoaded", () => {
    }
 
 
-
-
-
    function loadSongs(data) {
       console.log(data);
-      localStorage.setItem("songs", JSON.stringify(data));
+      localStorage.setItem("song", JSON.stringify(data));
   }
+
+
+  let arr = [];
+  if (!localStorage.getItem("arr")) {
+      localStorage.setItem("arr", []);
+  } else {
+      arr = JSON.parse(localStorage.getItem("arr"));
+      console.log('initial playlist', arr);
+  }
+ 
+
+
+  const samp = JSON.parse(localStorage.getItem("songs")) || JSON.parse(sampSongs);
+  const art = JSON.parse(artists);
+  const gen = JSON.parse(genres); 
+  console.log("songs object", samp);
+  console.log("sessionStorage", sessionStorage);
+  let sort = "title";
+
+
+
+  function listOutput(title, parent) {
+
+   const opt = document.createElement("option");
+   opt.value = title;
+   opt.textContent = title;
+   parent.appendChild(opt);
+}
+
+
+
+   samp.forEach(song => {
+   listOutput(song.title, document.getElementById("titleSearch"));
+
+})
+
+   art.forEach((artist) => {
+   listOutput(artist.name, document.getElementById("artistSearch"));
+
+});
+
+   gen.forEach((genre) => {
+   listOutput(genre.name, document.getElementById("genreSearch"));
+
+});
+
+makeTable(sampSongs);
+
+/*
+function makeTable(songs) {
+   const big = document.getElementById("song-table"); 
+   const tr = document.createElement("tr");
+   tr.setAttribute("songID", songs.song_id);
+   const tdTitle = document.createElement("td");
+   tdTitle.classList.add("songTitle");
+   tdTitle.textContent = songs.title;
+   tr.appendChild(tdTitle);
+}
+*/
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
 
  
 
@@ -45,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 //list out song list 
-const samp = JSON.parse(sampSongs);
+//const samp = JSON.parse(sampSongs);
 
 // //sort by title
 // document.write("<h1>title sort</h1>");
@@ -196,7 +278,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
    
    //const sorted = samp.sort((a, b) => a.title.localeCompare(b.title));
-   const arr = document.querySelector('.artists');
+   /*const arr = document.querySelector('.artists');
    
    for (let s of artistSort) {
       //makes tr, td
@@ -215,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function() {
       
 
    }
-
+*/
    
    
 

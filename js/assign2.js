@@ -179,7 +179,12 @@ function makeTable(songs) {
 
    sortCalc(samp);
 
+const symbolSort = '******';
 
+function updateButton() { 
+      const icon = symbolSort; 
+      titleSelect.textContent = icon; 
+} 
 
    column.addEventListener('click', function(e){
          
@@ -191,7 +196,7 @@ function makeTable(songs) {
 
       if(e.target == titleSelect){
          const titleSort = samp.sort((a, b) => a.title.localeCompare(b.title));
-         titleSelect.addEventListener('click', updateButton); 
+         //titleSelect.addEventListener('click', updateButton); 
       }else if (e.target == artSelect){
          const artistSort = samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
 
@@ -210,15 +215,6 @@ function makeTable(songs) {
    });
 
 
-
-
-
-const symbolSort = '*';
-
-function updateButton() { 
-      const icon = symbolSort; 
-      titleSelect.textContent = icon; 
-} 
 
 
 

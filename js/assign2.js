@@ -173,21 +173,7 @@ function makeTable(songs) {
 
    //const resultTitle = samp.sort((a, b) => a.title.localeCompare(b.title));
 
-   let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
-   
-
-   let headerRow = document.createElement('tr');
-
-   headers.forEach(headerText => {
-      let header = document.createElement('th');
-      header.setAttribute('id',headerText);
-      let textNode = document.createTextNode(headerText);
-      header.appendChild(textNode);
-      headerRow.appendChild(header);
-
-   });
-
-   table.appendChild(headerRow);
+  
 
    let column = document.querySelector('#table');
 
@@ -205,6 +191,7 @@ function makeTable(songs) {
 
       if(e.target == titleSelect){
          const titleSort = samp.sort((a, b) => a.title.localeCompare(b.title));
+         titleSelect.addEventListener('click', updateButton); 
       }else if (e.target == artSelect){
          const artistSort = samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
 
@@ -220,28 +207,38 @@ function makeTable(songs) {
       sortCalc(samp);
 
 
-
-
-
-
-
-
-
-
    });
 
 
 
 
 
-      
+const symbolSort = '*';
 
-
+function updateButton() { 
+      const icon = symbolSort; 
+      titleSelect.textContent = icon; 
+} 
 
 
 
 function sortCalc(sortWay){
+   table.innerHTML = "";
+   let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
+   
+   let headerRow = document.createElement('tr');
 
+   headers.forEach(headerText => {
+      let header = document.createElement('th');
+      header.setAttribute('id',headerText);
+      let textNode = document.createTextNode(headerText);
+      header.appendChild(textNode);
+      headerRow.appendChild(header);
+
+   });
+
+   table.appendChild(headerRow);
+   
    for(let s of sortWay) {
       let tr = document.createElement('tr');
       let td = document.createElement('td');

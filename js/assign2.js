@@ -96,9 +96,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
                
       sortCalc(samp);
+      addPlaylist();
+      
+
    });
+   
+   const added = [];
 
+   function addPlaylist(){
+      const button = document.querySelectorAll('.addBtn');
+   
+      for(let b of button){
+         
+            b.addEventListener('click',function(e){
+               const found = samp.find(s => s.song_id ==b.getAttribute('id'));  
+               added.push(b);
+               console.log(added);
+            });
+         }
 
+   }
 
    // const playlistCol = document.querySelectorAll('#Playlist');
 
@@ -107,23 +124,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
    // }
 
-   const added = [];
+   // const added = [];
 
-   const button = document.querySelectorAll('.addBtn');
+   // const button = document.querySelectorAll('.addBtn');
+
+   // for(let b of button){
+      
+   //       b.addEventListener('click',function(e){
+
+   //          const found = samp.find(s => s.song_id ==b.getAttribute('id'));
 
 
-   for(let i = 0; i < button.length; i++){
+   //          console.log(found);
 
-      for(let b of button){
-         
-            b.addEventListener('click',function(e){
+   //       });
+   //    }
 
-               const found = samp.find(s => s.song_id ==b.getAttribute('id'));
-               console.log(found);
-
-            });
-      }
-   }
       
 
    // for (const addButton of button) {

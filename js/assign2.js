@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
 
 
-  const samp = JSON.parse(localStorage.getItem("songs")) || JSON.parse(sampSongs);
+  const samp = JSON.parse(localStorage.getItem("song")); //|| JSON.parse(sampSongs);
   const art = JSON.parse(artists);
   const gen = JSON.parse(genres); 
   console.log("songs object", samp);
@@ -42,24 +42,24 @@ document.addEventListener("DOMContentLoaded", () => {
    opt.value = title;
    opt.textContent = title;
    parent.appendChild(opt);
-}
+   }
 
 
 
-   samp.forEach(song => {
-   listOutput(song.title, document.getElementById("titleSearch"));
+      samp.forEach(song => {
+      listOutput(song.title, document.getElementById("titleSearch"));
 
-})
+   })
 
-   art.forEach((artist) => {
-   listOutput(artist.name, document.getElementById("artistSearch"));
+      art.forEach((artist) => {
+      listOutput(artist.name, document.getElementById("artistSearch"));
 
-});
+   });
 
-   gen.forEach((genre) => {
-   listOutput(genre.name, document.getElementById("genreSearch"));
+      gen.forEach((genre) => {
+      listOutput(genre.name, document.getElementById("genreSearch"));
 
-});
+   });
 
 //makeTable(sampSongs);
 
@@ -131,7 +131,7 @@ function makeTable(songs) {
 
 // //sort by title
 // document.write("<h1>title sort</h1>");
-// const sortTitle = samp.sort((a, b) => a.title.localeCompare(b.title));
+
 // for (let s of sortTitle) {
 //    document.write(s.title + "<br>");
 // }
@@ -139,23 +139,21 @@ function makeTable(songs) {
 
 // //sort by artist name 
 // document.write("<h1>artist sort</h1>");
-// const artistName = samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
 // for (let s of artistName) {
 //    document.write(s.artist.name + "<br>");
 // }
 
-
 // //sort by year 
 // document.write("<h1>year sort</h1>");
 // let sortField = "year";
-// const sortedYear = samp.sort((a,b) => a.year < b.year?-1:1);
+
 // for (let s of sortedYear) {
 //    document.write(s.year + "<br>");
 // }
 
 // //sort by genre
 // document.write("<h1>genre</h1>");
-// const genre = samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name));
+
 // for (let s of genre) {
 //    document.write(s.genre.name + "<br>");
 // }
@@ -163,155 +161,26 @@ function makeTable(songs) {
 
 // //sort by popularity
 // document.write("<h1>popularity</h1>");
-// const popSort = samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
+
 // for (let s of popSort) {
 //    document.write(s.details.popularity + "<br>");
 // }
 // console.log(popSort);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-
-
-
-
-
 //loading titles
-   // const title = document.querySelector('.info');
+   const table = document.querySelector('#table');
 
-   // const resultTitle = samp.sort((a, b) => a.title.localeCompare(b.title));
+   //const resultTitle = samp.sort((a, b) => a.title.localeCompare(b.title));
 
-   
-   // for (let s of resultTitle) {
-   //    let tr = document.createElement('tr');
-   //    let td = document.createElement('td');
-
-   //    td.innerHTML = s.title;
-   //    tr.appendChild(td);
-   //    title.appendChild(tr);
-   
-   //    tr.setAttribute('value',s.title);
-   // }
-
-   //artists
-   // const art = document.querySelector('.artists');
-   // const artistSort = samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
-   // for (let s of artistSort) {
-   //    //let value = document.querySelector('#s.title');
-
-
-   //    let tr = document.createElement('tr');
-   //    let td = document.createElement('td');
-
-   //    td.innerHTML = s.artist.name;
-   //    tr.appendChild(td);
-   //    title.appendChild(tr);
-   
-   //    //tr.setAttribute('value',s.title);
-
-   // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   const title = document.querySelector('.info');
+   let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
    
 
-   const sorted = samp.sort((a, b) => a.title.localeCompare(b.title));
-   const artistSort = samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
-
-   
-   for (let s of sorted) {
-      //makes tr, td
-      let tr = document.createElement('tr');
-      let td = document.createElement('td');
-
-      //set text for td
-      td.innerHTML = s.title;
-      
-      //put td into tr
-      tr.appendChild(td);
-      
-      //put tr to the main tr
-   title.appendChild(tr);
-
-   // //making another td
-   //    let tdArt = document.createElement('td');
-
-   //    //set info for td
-   //    tdArt.innerHTML = s.artist.name;
-      
-   //    //put td in tr
-   //    title.appendChild(tdArt);
-
-      
-   }
-
-
-
-
-
-   
-   //const sorted = samp.sort((a, b) => a.title.localeCompare(b.title));
-   /*const arr = document.querySelector('.artists');
-   
-   for (let s of artistSort) {
-      //makes tr, td
-      let tr = document.createElement('tr');
-      let td = document.createElement('td');
-
-      //set text for td
-      td.innerHTML = s.artist.name;
-      
-      
-      //put td into tr
-      tr.appendChild(td);
-      
-      //put tr to the main tr
-      arr.appendChild(td);
-      
-
-   }
-*/
-   
-/*Doing shit from the video*/
-
-let btnGet = document.querySelector('button');
-let myTable = document.querySelector('#table');
-
-let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
-
-btnGet.addEventListener('click', () => {
-   let table = document.createElement('table');
    let headerRow = document.createElement('tr');
 
    headers.forEach(headerText => {
       let header = document.createElement('th');
+      header.setAttribute('id',headerText);
       let textNode = document.createTextNode(headerText);
       header.appendChild(textNode);
       headerRow.appendChild(header);
@@ -320,47 +189,93 @@ btnGet.addEventListener('click', () => {
 
    table.appendChild(headerRow);
 
-   samp.forEach(s => {
-      let row = document.createElement('tr');
+   let column = document.querySelector('#table');
 
-      Object.values(s).forEach(text => {
-         let cell = document.createElement('td');
-         cell.innerHTML = s.title;
-         //let textNode = document.createTextNode(text);
-         //cell.appendChild(textNode);
-         row.appendChild(cell);
-      })
+   sortCalc(samp);
 
-      table.appendChild(row);
-   })
 
-   myTable.appendChild(table);
-});
+
+   column.addEventListener('click', function(e){
+         
+      let titleSelect = document.querySelector('#Title');
+      let artSelect = document.querySelector('#Artist');
+      let yearSelect = document.querySelector('#Year');
+      let genSelect = document.querySelector('#Genre');
+      let popSelect = document.querySelector('#Popularity');
+
+      if(e.target == titleSelect){
+         const titleSort = samp.sort((a, b) => a.title.localeCompare(b.title));
+      }else if (e.target == artSelect){
+         const artistSort = samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
+
+      }else if (e.target == yearSelect){
+         const yearSort = samp.sort((a,b) => a.year < b.year?-1:1);
+      }else if (e.target == genSelect){
+         const genreSort = samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name));
+      }else if (e.target == popSelect){
+         const popSort = samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
+      }
+               
+      
+      sortCalc(samp);
+
+
+
+
+
+
+
+
+
+
+   });
+
+
+
+
+
+      
+
+
+
+
+
+function sortCalc(sortWay){
+
+   for(let s of sortWay) {
+      let tr = document.createElement('tr');
+      let td = document.createElement('td');
+
+      td.innerHTML = s.title;
+      tr.appendChild(td);
    
+      let td2 = document.createElement('td');
 
+      td2.innerHTML = s.artist.name;
+      tr.appendChild(td2);
+         
+         
+      let td3 = document.createElement('td');
 
+      td3.innerHTML = s.year;
+      tr.appendChild(td3);
+         
+      let td4 = document.createElement('td');
 
+      td4.innerHTML = s.genre.name;
+      tr.appendChild(td4);
+         
+         
+      let td5 = document.createElement('td');
 
+      td5.innerHTML = s.details.popularity;
+      tr.appendChild(td5);
+         
+      table.appendChild(tr);
+   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-});
-
+   
+}
 
 });
 

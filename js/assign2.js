@@ -256,6 +256,7 @@ document.querySelector("#filterButton").addEventListener("click", () => {
       
       search = searchForm.namedItem("Titles").value;
       s = samp.find(s => s.title == searchForm.namedItem("Titles").value);
+
    }
    else if (searchForm.namedItem("Artists").value) {
       
@@ -322,7 +323,9 @@ document.querySelector("#filterButton").addEventListener("click", () => {
 
    function isBigEnough(value) {
       
-      return value;
+      if (value == samp.find()) {
+         return true;
+       }
       
    }
 // /document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());

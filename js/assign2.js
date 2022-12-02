@@ -138,14 +138,34 @@ document.addEventListener("DOMContentLoaded", () => {
                //console.log(added);
                //**add toast here */
 
-               makeSnack("Song Added", "#snack", 3000);
+               //makeSnack("Song Added", "#snack", 3000);
 
             });
          }
    }
    addPlaylist();
 
+   function rmPlaylist(){
+      const button = document.querySelectorAll('.rmBtn');
    
+      for(let b of button){
+         
+            b.addEventListener('click',function(e){
+               const found = samp.filter(s => s.song_id !==b.getAttribute('id'));  
+               //const found = samp.filter(e => e !== b.getAttribute('id'));
+               
+
+               
+               //var filteredArray = arr.filter(e => e !== 'seven')
+               //added.remove(found);
+               alert(found);
+               //**add toast here */
+
+               //makeSnack("Song Added", "#snack", 3000);
+
+            });
+         }
+   }
 
 //sorting based on params
 function sortCalc(sortWay){
@@ -196,6 +216,60 @@ function sortCalc(sortWay){
       btn.setAttribute('id',s.song_id);
       btn.setAttribute('class','addBtn');
       btn.textContent = 'Add';
+      tr.appendChild(btn);
+
+      table.appendChild(tr);
+   }
+}
+
+function rmTable(songsPassed){
+   table.innerHTML = "";
+   let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
+   
+   let headerRow = document.createElement('tr');
+
+   headers.forEach(headerText => {
+      let header = document.createElement('th');
+      header.setAttribute('id',headerText);
+      let textNode = document.createTextNode(headerText);
+      header.appendChild(textNode);
+      headerRow.appendChild(header);
+   });
+
+   table.appendChild(headerRow);
+   
+   for(let s of songsPassed) {
+      let tr = document.createElement('tr');
+      let td = document.createElement('td');
+
+      td.innerHTML = s.title;
+      tr.appendChild(td);
+   
+      let td2 = document.createElement('td');
+
+      td2.innerHTML = s.artist.name;
+      tr.appendChild(td2);
+         
+      let td3 = document.createElement('td');
+
+      td3.innerHTML = s.year;
+      tr.appendChild(td3);
+         
+      let td4 = document.createElement('td');
+
+      td4.innerHTML = s.genre.name;
+      tr.appendChild(td4);
+        
+      let td5 = document.createElement('td');
+
+      td5.innerHTML = s.details.popularity;
+      tr.appendChild(td5);
+         
+      let btn = document.createElement('button');
+   
+      btn.setAttribute('id',s.song_id);
+      btn.setAttribute('class','rmBtn');
+      btn.textContent = 'Remove';
       tr.appendChild(btn);
 
       table.appendChild(tr);
@@ -270,16 +344,19 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
 
       newArray = samp.filter(s => s.title == filter);
       sortCalc(newArray);
+      addPlaylist();
       form.namedItem("titleSearch").value = '';
    }else if (searchType == 'artist'){
 
       newArray = samp.filter(s => s.artist.name == filter);
       sortCalc(newArray);
+      addPlaylist();
       form.namedItem("artistSearch").value = '';
    }else if (searchType == 'genre'){
 
       newArray = samp.filter(s => s.genre.name == filter);
       sortCalc(newArray);
+      addPlaylist();
       form.namedItem("genreSearch").value = '';
    }  
 
@@ -290,8 +367,8 @@ document.querySelector("#clearButton").addEventListener("click", sessionStorage.
 
 document.querySelector("#viewPlaylist").addEventListener("click", function(e){
    e.preventDefault();
-   sortCalc(added);
-
+   rmTable(added);
+   rmPlaylist();
 }
 );
 

@@ -363,7 +363,11 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
 });
 
 //clear for now
-document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());
+document.querySelector("#clearButton").addEventListener("click", function (e){
+   e.preventDefault();
+   sortCalc(samp);
+
+});
 
 document.querySelector("#viewPlaylist").addEventListener("click", function(e){
    e.preventDefault();

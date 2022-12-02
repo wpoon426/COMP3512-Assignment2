@@ -256,6 +256,7 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
    } else if (form.namedItem("genreSearch").value) {
        searchType = 'genre';
        filter = form.namedItem("genreSearch").value;
+       alert('asdasdasdas');
    }
    sessionStorage.setItem(searchType, filter);
 

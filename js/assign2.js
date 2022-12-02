@@ -223,6 +223,9 @@ function filterSelect(event) {
       hide.forEach(hidden => (hidden.classList.remove("hide")));
       const word = [];
       console.log(filter);
+
+      let form = document.querySelector("#searchType").elements;
+
       if (filter == "filterTitle") {
          word.push(document.querySelector("#artistSearch").parentElement);
          word.push(document.querySelector("#genreSearch").parentElement);
@@ -245,47 +248,40 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
    let form = document.querySelector("#searchType").elements;
    let searchType;
    let filter;
-
-   if (form.namedItem("titleSearch").value) {
+   
+   if (document.querySelector('#titleSearch').value) {
        searchType = 'title';
        filter = form.namedItem("titleSearch").value;
 
-   } else if (form.namedItem("artistSearch").value) {
+   } else if (document.querySelector('#artistSearch').value) {
        searchType = 'artist';
        filter = form.namedItem("artistSearch").value;
 
-   } else if (form.namedItem("genreSearch").value) {
+   } else if (document.querySelector('#genreSearch').value) {
        searchType = 'genre';
        filter = form.namedItem("genreSearch").value;
-       alert('asdasdasdas');
+
    }
    sessionStorage.setItem(searchType, filter);
 
-   let f = 0;
    let newArray = [];
-   let count = 0;
 
-  // while(f <= count){
    if (searchType == 'title'){
 
       newArray = samp.filter(s => s.title == filter);
       sortCalc(newArray);
-     // count++;
-   
+      form.namedItem("titleSearch").value = '';
    }else if (searchType == 'artist'){
 
       newArray = samp.filter(s => s.artist.name == filter);
       sortCalc(newArray);
-     // count++;
+      form.namedItem("artistSearch").value = '';
    }else if (searchType == 'genre'){
 
       newArray = samp.filter(s => s.genre.name == filter);
       sortCalc(newArray);
-    //  count++;
-   }
-
- //  }
-   
+      form.namedItem("genreSearch").value = '';
+   }  
 
 });
 

@@ -13,9 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
       loadSongs(songs)
    }
 
+   //Get Songs function 
+   function getLocalStorage(){
+      return JSON.parse(localStorage.getItem('songs')) || "";
+   }
+
    function loadSongs(data) {
       console.log(data);
-      localStorage.setItem("song", JSON.stringify(data));   
+      localStorage.setItem("song", JSON.stringify(data));
 
       if (sessionStorage.getItem("title")) {
          let title = sessionStorage.getItem("title");

@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
                //console.log(added);
                //**add toast here */
 
+               makeSnack("Song Added", "#snack", 3000);
 
             });
          }
@@ -297,6 +298,18 @@ document.querySelector("#viewPlaylist").addEventListener("click", function(e){
 
 }
 );
+
+
+
+function makeSnack(notify, snackBar, timer) {
+   let snack = document.querySelector(snackBar);
+   if (snackBar == '#snack') {
+       snack.textContent = notify;
+   }
+   snack.classList.add("show");
+   setTimeout(() => { snack.classList.remove("show") }, timer);
+}
+
 
 
  });

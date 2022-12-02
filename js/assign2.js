@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
 
 
-   const samp = JSON.parse(localStorage.getItem("song")); //|| JSON.parse(sampSongs);
+   const samp = JSON.parse(localStorage.getItem("songs"));
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);
@@ -57,6 +57,31 @@ document.addEventListener("DOMContentLoaded", () => {
       listOutput(genre.name, document.getElementById("genreSearch"));
    });
 
+   
+
+   let searchedSong;
+   if (sessionStorage.getItem("title")) {
+      let songTitle = sessionStorage.getItem("title");
+      searchedSong = samp.filter((song) => {
+         return String(song.title).includes(songTitle.toLowerCase());
+      });
+   }
+   else if (sessionStorage.getItem("artist")) {
+      let songArtist = sessionStorage.getItem("artist");
+      searchedSong = samp.filter((song) => {
+          return song.artist.name == songArtist;
+      });
+  }
+   else if (sessionStorage.getItem("genre")) {
+   let songGenre = sessionStorage.getItem("genre");
+   searchedSong = samp.filter((song) => {
+       return song.artist.name == songGenre;
+   });
+}
+
+console.log(searchedSong);
+loadTable();
+   
 
 
 /* note: you may get a CORS error if you try fetching this locally (i.e., directly from a
@@ -69,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
    //loading tables
+   function loadTable() {
    const table = document.querySelector('#table');
 
    let column = document.querySelector('#table');
@@ -83,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let genSelect = document.querySelector('#Genre');
       let popSelect = document.querySelector('#Popularity');
 
+
       if(e.target == titleSelect){
          samp.sort((a, b) => a.title.localeCompare(b.title));
       }else if (e.target == artSelect){
@@ -93,13 +120,16 @@ document.addEventListener("DOMContentLoaded", () => {
          samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name));
       }else if (e.target == popSelect){
          samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
-      }
-               
+      }  
       sortCalc(samp);
       addPlaylist();
       
 
    });
+
+}
+
+
    
    const added = [];
 
@@ -117,59 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
    }
 
-   // const playlistCol = document.querySelectorAll('#Playlist');
-
-   // for(let p of playlistCol){
-
-
-   // }
-
-   // const added = [];
-
-   // const button = document.querySelectorAll('.addBtn');
-
-   // for(let b of button){
-      
-   //       b.addEventListener('click',function(e){
-
-   //          const found = samp.find(s => s.song_id ==b.getAttribute('id'));
-
-
-   //          console.log(found);
-
-   //       });
-   //    }
-
-      
-
-   // for (const addButton of button) {
-   //    addButton.addEventListener("click", () => {
-   //      let product = samp.find(p => p.Id == addButton.dataset.product);
-   //      added.push(product);
-   //      //amountLabel.innerText = added.length + "items";
-   //      console.log(added);
-   //    });
-   // };  
-
-   // }
-
-   // for(let i = 0; i < button.length; i++){
-      
-   //    button[i].addEventListener('click',function(e){
-
-   //       //let x = button[i].getAttribute('id');
-   //       if (e.target == button[i]){
-
-   //          let a = button[i].getAttribute('id');
-   //          alert(a);
-   //          added.push(button);
-   
-   //          console.log(added);
-   //       }
-            
-   
-   //       });
-   //    }
 
 
 
@@ -232,17 +209,83 @@ function sortCalc(sortWay){
 }
 
 
+document.querySelector("#filter-type").addEventListener("change", filterSelect);
 
 
 
+function filterSelect(event) { 
+      const filter = event.target.value;
+      console.log(event.target);
+      const hide = document.querySelectorAll("#searchType .hide");
+      hide.forEach(hidden => (hidden.classList.remove("hide")));
+      const word = [];
+      console.log(filter);
+      if (filter == "filterTitle") {
+         word.push(document.querySelector("#artistSearch").parentElement);
+         word.push(document.querySelector("#genreSearch").parentElement);
+      }
+      else if (filter == "filterArtist") {
+         word.push(document.querySelector("#titleSearch").parentElement);
+         word.push(document.querySelector("#genreSearch").parentElement);
+      }
+      else if (filter == "filterGenre") {
+         word.push(document.querySelector("#titleSearch").parentElement);
+         word.push(document.querySelector("#artistSearch").parentElement);
+      }
+      word.forEach(elementType => (elementType.classList.add("hide")));
+}
 
 
+document.querySelector("#filterButton").addEventListener("click", () => { 
+   sessionStorage.clear();
+   const searchForm = document.getElementById("searchType").elements;
+   let typeOfSearch;
+   let search;
 
 
+   if (searchForm.namedItem("Titles").value) {
+      typeOfSearch = 'title';
+      search = searchForm.namedItem("Titles").value;
+   }
+   else if (searchForm.namedItem("Artists").value) {
+      typeOfSearch = 'artist';
+      search = searchForm.namedItem("Artists").value;
+   }
+   else if (searchForm.namedItem("Gen").value) {
+      typeOfSearch = 'genre';
+      search = searchForm.namedItem("Gen").value;
+   }
 
-
-
+   sessionStorage.setItem(typeOfSearch, search);
 
 
 });
+
+document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());
+});
+
+
+
+
+
+//load single song view
+
+
+for (let c of clickedSong) {
+const div = document.createElement("div");
+
+let infoTitle = document.createElement("h1");
+infoTitle.id = "word";
+
+infoTitle.textContent = clickedSong.title;
+
+
+
+
+}
+
+
+
+
+
 

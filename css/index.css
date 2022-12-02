@@ -1,4 +1,4 @@
-.hidden{
+.hidden {
     display:none;
 }
 
@@ -44,6 +44,10 @@ th, td {
 
 #Popularity:active {
     background-color: green;
+}
+
+.hide {
+    display: none;
 }
 
 

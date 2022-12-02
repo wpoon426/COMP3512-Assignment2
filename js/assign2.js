@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
 
 
-   const samp = JSON.parse(localStorage.getItem("song"));
+   const samp = JSON.parse(localStorage.getItem("songs"));
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);
@@ -240,47 +240,50 @@ function filterSelect(event) {
       word.forEach(elementType => (elementType.classList.add("hide")));
 }
 
-const filter = [];
-function isBigEnough(value) {
-   
-   if (value == "Alarm"){
-
-      return true;
-   }
-
-   
- }
- 
- const filtered = filter.filter(isBigEnough);
 
 
 
 document.querySelector("#filterButton").addEventListener("click", () => { 
-
+   const filter = [];
+   
    const searchForm = document.querySelector("#searchType").elements;
-
+   
    let search;
-
-
+   
+   
    if (searchForm.namedItem("Titles").value) {
-     
+      
       search = searchForm.namedItem("Titles").value;
    }
    else if (searchForm.namedItem("Artists").value) {
-    
+      
       search = searchForm.namedItem("Artists").value;
    }
    else if (searchForm.namedItem("Gen").value) {
       
       search = searchForm.namedItem("Gen").value;
    }
-
-
+   
+   
    filter.push(search);
    alert(filter);
+   
+   
+   function isBigEnough(value) {
+      
+      return value;
+      
+   }
+   
+   const filtered = filter.filter(isBigEnough);
+    
+   
+   
+   
+   
    alert(filtered);
-
-
+   
+   
 });
 
 // /document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());

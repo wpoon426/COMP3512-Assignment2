@@ -134,12 +134,17 @@ document.addEventListener("DOMContentLoaded", () => {
          
             b.addEventListener('click',function(e){
                const found = samp.find(s => s.song_id ==b.getAttribute('id'));  
-               added.push(b);
-               console.log(added);
+               added.push(found);
+               //console.log(added);
+               //**add toast here */
+
+
             });
          }
    }
    addPlaylist();
+
+   
 
 //sorting based on params
 function sortCalc(sortWay){
@@ -256,28 +261,28 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
 
    let f = 0;
    let newArray = [];
-let count = 0;
+   let count = 0;
 
-   while(f <= count){
+  // while(f <= count){
    if (searchType == 'title'){
 
       newArray = samp.filter(s => s.title == filter);
       sortCalc(newArray);
-      count++;
+     // count++;
    
    }else if (searchType == 'artist'){
 
       newArray = samp.filter(s => s.artist.name == filter);
       sortCalc(newArray);
-      count++;
+     // count++;
    }else if (searchType == 'genre'){
 
       newArray = samp.filter(s => s.genre.name == filter);
       sortCalc(newArray);
-      count++;
+    //  count++;
    }
-   
-   }
+
+ //  }
    
 
 });
@@ -285,7 +290,12 @@ let count = 0;
 //clear for now
 document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());
 
+document.querySelector("#viewPlaylist").addEventListener("click", function(e){
+   e.preventDefault();
+   sortCalc(added);
 
+}
+);
 
 
  });

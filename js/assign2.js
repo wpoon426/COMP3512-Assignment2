@@ -42,9 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
      }
 
      
-     console.log(filteredSongs);
+     //console.log(filteredSongs);
 
-        filteredSongs ? alphaSortColumn(filteredSongs, "title") : alphaSortColumn(songs, "title");
+       // filteredSongs ? alphaSortColumn(filteredSongs, "title") : alphaSortColumn(songs, "title");
 
         //addTableListener("#song-table-body");
 
@@ -233,7 +233,8 @@ function filterSelect(event) {
 }
 
 //Search button works but does not work
-document.querySelector("#filterButton").addEventListener("click", () => {
+document.querySelector("#filterButton").addEventListener("click", (e) => {
+   e.preventDefault();
    sessionStorage.clear();
    let form = document.querySelector("#searchType").elements;
    let searchType;
@@ -252,27 +253,39 @@ document.querySelector("#filterButton").addEventListener("click", () => {
        filter = form.namedItem("genreSearch").value;
    }
    sessionStorage.setItem(searchType, filter);
+
+   let f = 0;
+   let newArray = [];
+let count = 0;
+
+   while(f <= count){
+   if (searchType == 'title'){
+
+      newArray = samp.filter(s => s.title == filter);
+      sortCalc(newArray);
+      count++;
+   
+   }else if (searchType == 'artist'){
+
+      newArray = samp.filter(s => s.artist.name == filter);
+      sortCalc(newArray);
+      count++;
+   }else if (searchType == 'genre'){
+
+      newArray = samp.filter(s => s.genre.name == filter);
+      sortCalc(newArray);
+      count++;
+   }
+   
+   }
+   
+
 });
 
-// /document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());
-//});
+//clear for now
+document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());
 
-//load single song view
-function singleSongPageView(songId) {
-   const foundSongData = samp.find(song => song.song_id == songId);
-   //console to check functionality.
-   console.log("This is the found song data", foundSongData);
-   // select parent 
-   const ssParent = document.querySelector('.songview-parent');
-   ssParent.replaceChildren()
-   console.log('ssParent', ssParent);
 
-   ssParent.appendChild(createInfopage(foundSongData));
-   //ssParent.appendChild(createRadarpage(foundSongData));
-
-   console.log("title:", foundSongData.title);
-   switchDisplay("single-song-page");
-}
 
 
  });

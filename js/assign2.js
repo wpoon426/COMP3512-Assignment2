@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
 
 
-   const samp = JSON.parse(localStorage.getItem("songs"));
+   const samp = JSON.parse(localStorage.getItem("song"));
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);
@@ -249,43 +249,82 @@ document.querySelector("#filterButton").addEventListener("click", () => {
    const searchForm = document.querySelector("#searchType").elements;
    
    let search;
+   let s;
    
    
    if (searchForm.namedItem("Titles").value) {
       
       search = searchForm.namedItem("Titles").value;
+      s = samp.find(s => s.title == searchForm.namedItem("Titles").value);
    }
    else if (searchForm.namedItem("Artists").value) {
       
       search = searchForm.namedItem("Artists").value;
+      s = samp.find(s => s.artist.name == searchForm.namedItem("Artists").value);
    }
    else if (searchForm.namedItem("Gen").value) {
       
       search = searchForm.namedItem("Gen").value;
+      s = samp.find(s => s.genre.name == searchForm.namedItem("Gen").value);
    }
    
    
    filter.push(search);
    alert(filter);
    
+   const filtered = filter.filter(isBigEnough);
    
+   //alert(filtered);
+   alert(s.title);
+   alert(s.artist.name);
+   //sortCalc(song);
+   // table.innerHTML = "";
+      let tr = document.createElement('tr');
+      let td = document.createElement('td');
+
+      td.innerHTML = s.title;
+      tr.appendChild(td);
+   
+      let td2 = document.createElement('td');
+
+      td2.innerHTML = s.artist.name;
+      tr.appendChild(td2);
+         
+      let td3 = document.createElement('td');
+
+      td3.innerHTML = s.year;
+      tr.appendChild(td3);
+         
+      let td4 = document.createElement('td');
+
+      td4.innerHTML = s.genre.name;
+      tr.appendChild(td4);
+        
+      let td5 = document.createElement('td');
+
+      td5.innerHTML = s.details.popularity;
+      tr.appendChild(td5);
+         
+      let btn = document.createElement('button');
+   
+      btn.setAttribute('id',s.song_id);
+      btn.setAttribute('class','addBtn');
+      btn.textContent = 'Add';
+      tr.appendChild(btn);
+
+      table.appendChild(tr);
+  
+
+   
+});
+
+
+
    function isBigEnough(value) {
       
       return value;
       
    }
-   
-   const filtered = filter.filter(isBigEnough);
-    
-   
-   
-   
-   
-   alert(filtered);
-   
-   
-});
-
 // /document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());
 //});
 

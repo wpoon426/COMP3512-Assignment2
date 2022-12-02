@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
 
 
-   const samp = JSON.parse(localStorage.getItem("songs"));
+   const samp = JSON.parse(localStorage.getItem("song"));
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);
@@ -44,43 +44,43 @@ document.addEventListener("DOMContentLoaded", () => {
    }
 
    samp.forEach(song => {
-      listOutput(song.title, document.getElementById("titleSearch"));
+      listOutput(song.title, document.querySelector("#titleSearch"));
 
    })
 
    art.forEach((artist) => {
-      listOutput(artist.name, document.getElementById("artistSearch"));
+      listOutput(artist.name, document.querySelector("#artistSearch"));
 
    });
 
    gen.forEach((genre) => {
-      listOutput(genre.name, document.getElementById("genreSearch"));
+      listOutput(genre.name, document.querySelector("#genreSearch"));
    });
 
    
 
-   let searchedSong;
-   if (sessionStorage.getItem("title")) {
-      let songTitle = sessionStorage.getItem("title");
-      searchedSong = samp.filter((song) => {
-         return String(song.title).includes(songTitle.toLowerCase());
-      });
-   }
-   else if (sessionStorage.getItem("artist")) {
-      let songArtist = sessionStorage.getItem("artist");
-      searchedSong = samp.filter((song) => {
-          return song.artist.name == songArtist;
-      });
-  }
-   else if (sessionStorage.getItem("genre")) {
-   let songGenre = sessionStorage.getItem("genre");
-   searchedSong = samp.filter((song) => {
-       return song.artist.name == songGenre;
-   });
-}
+//    let searchedSong;
+//    if (sessionStorage.getItem("title")) {
+//       let songTitle = sessionStorage.getItem("title");
+//       searchedSong = samp.filter((song) => {
+//          return String(song.title).includes(songTitle.toLowerCase());
+//       });
+//    }
+//    else if (sessionStorage.getItem("artist")) {
+//       let songArtist = sessionStorage.getItem("artist");
+//       searchedSong = samp.filter((song) => {
+//           return song.artist.name == songArtist;
+//       });
+//   }
+//    else if (sessionStorage.getItem("genre")) {
+//    let songGenre = sessionStorage.getItem("genre");
+//    searchedSong = samp.filter((song) => {
+//        return song.artist.name == songGenre;
+//    });
+// }
 
-console.log(searchedSong);
-loadTable();
+//console.log(searchedSong);
+//loadTable();
    
 
 
@@ -94,7 +94,7 @@ loadTable();
 
 
    //loading tables
-   function loadTable() {
+  // function loadTable() {
    const table = document.querySelector('#table');
 
    let column = document.querySelector('#table');
@@ -127,12 +127,11 @@ loadTable();
 
    });
 
-}
+//}
 
 
-   
+   //add playlist
    const added = [];
-
    function addPlaylist(){
       const button = document.querySelectorAll('.addBtn');
    
@@ -146,11 +145,9 @@ loadTable();
          }
 
    }
+   addPlaylist();
 
-
-
-
-
+//sorting based on params
 function sortCalc(sortWay){
    table.innerHTML = "";
    let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
@@ -209,13 +206,21 @@ function sortCalc(sortWay){
 }
 
 
-document.querySelector("#filter-type").addEventListener("change", filterSelect);
-
-
+if (document.querySelector('input[name="selection"]')) {
+   document.querySelectorAll('input[name="selection"]').forEach((elem) => {
+     elem.addEventListener("change", function(event) {
+       var item = event.target.value;
+       console.log(item);
+       filterSelect(event);
+     });
+   });
+ }
 
 function filterSelect(event) { 
+
       const filter = event.target.value;
       console.log(event.target);
+      
       const hide = document.querySelectorAll("#searchType .hide");
       hide.forEach(hidden => (hidden.classList.remove("hide")));
       const word = [];
@@ -235,34 +240,51 @@ function filterSelect(event) {
       word.forEach(elementType => (elementType.classList.add("hide")));
 }
 
+const filter = [];
+function isBigEnough(value) {
+   
+   if (value == "Alarm"){
+
+      return true;
+   }
+
+   
+ }
+ 
+ const filtered = filter.filter(isBigEnough);
+
+
 
 document.querySelector("#filterButton").addEventListener("click", () => { 
-   sessionStorage.clear();
-   const searchForm = document.getElementById("searchType").elements;
-   let typeOfSearch;
+
+   const searchForm = document.querySelector("#searchType").elements;
+
    let search;
 
 
    if (searchForm.namedItem("Titles").value) {
-      typeOfSearch = 'title';
+     
       search = searchForm.namedItem("Titles").value;
    }
    else if (searchForm.namedItem("Artists").value) {
-      typeOfSearch = 'artist';
+    
       search = searchForm.namedItem("Artists").value;
    }
    else if (searchForm.namedItem("Gen").value) {
-      typeOfSearch = 'genre';
+      
       search = searchForm.namedItem("Gen").value;
    }
 
-   sessionStorage.setItem(typeOfSearch, search);
+
+   filter.push(search);
+   alert(filter);
+   alert(filtered);
 
 
 });
 
-document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());
-});
+// /document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());
+//});
 
 
 
@@ -271,18 +293,18 @@ document.querySelector("#clearButton").addEventListener("click", sessionStorage.
 //load single song view
 
 
-for (let c of clickedSong) {
-const div = document.createElement("div");
+// for (let c of clickedSong) {
+// const div = document.createElement("div");
 
-let infoTitle = document.createElement("h1");
-infoTitle.id = "word";
+// let infoTitle = document.createElement("h1");
+// infoTitle.id = "word";
 
-infoTitle.textContent = clickedSong.title;
-
-
+// infoTitle.textContent = clickedSong.title;
 
 
-}
+
+
+ });
 
 
 

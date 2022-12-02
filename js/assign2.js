@@ -219,6 +219,64 @@ function sortCalc(sortWay){
       tr.appendChild(btn);
 
       table.appendChild(tr);
+
+
+      td.addEventListener("click", function() {
+         songInfo = document.querySelector("#songView");
+         viewSearch = document.querySelector("#searchView");
+         songInfo.hidden = false;
+         viewSearch.hidden = true;
+         
+         let songTitle = document.createElement("h3");
+         let songArtist = document.createElement("h3");
+         let songGenre = document.createElement("h3");
+         let songYear = document.createElement("h3");
+         let songDuration = document.createElement("h3");
+         let bpm = document.createElement("li");
+         let energy = document.createElement("li");
+         let dance = document.createElement("li");
+         let liveness = document.createElement("li");
+         let valence = document.createElement("li");
+         let acoustic = document.createElement("li");
+         let speech = document.createElement("li");
+         let popularity = document.createElement("li");
+         let list = document.createElement("ul");
+       
+         songTitle.textContent = "Title:  " + s.title;
+         songArtist.textContent = "Artist:  " + s.artist.name;
+         songGenre.textContent = "Genre:  " + s.genre.name;
+         songYear.textContent = "Year:  " + s.year;
+         songDuration.textContent = "Duration:  " + s.details.duration;
+         songInfo.appendChild(songTitle);
+         songInfo.appendChild(songArtist);
+         songInfo.appendChild(songGenre);
+         songInfo.appendChild(songYear);
+         songInfo.appendChild(songDuration);
+       
+         bpm.textContent =  "BPM:  " + s.details.bpm;
+         energy.textContent = "Energy  " + s.analytics.energy;
+         dance.textContent = "Danceability  " + s.analytics.danceability;
+         liveness.textContent = "Liveness  " + s.analytics.liveness;
+         valence.textContent = "Valence  " + s.analytics.valence;
+         acoustic.textContent = "Acousticness  " + s.analytics.acousticness;
+         speech.textContent = "Speechiness  " + s.analytics.speechiness;
+         popularity.textContent = "Popularity  " + s.details.popularity;
+       
+         songInfo.appendChild(list);
+         list.appendChild(bpm);
+         list.appendChild(energy);
+         list.appendChild(dance);
+         list.appendChild(liveness);
+         list.appendChild(valence);
+         list.appendChild(acoustic);
+         list.appendChild(speech);
+         list.appendChild(popularity);
+         
+       
+         
+       
+        });
+
    }
 }
 

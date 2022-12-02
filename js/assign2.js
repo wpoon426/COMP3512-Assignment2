@@ -8,14 +8,42 @@ document.addEventListener("DOMContentLoaded", () => {
            .then(data => {
                loadSongs(data)
            })
+   }else{
+      songs = JSON.parse(localStorage.getItem("songs"))
+      loadSongs(songs)
    }
-
 
    function loadSongs(data) {
       console.log(data);
       localStorage.setItem("song", JSON.stringify(data));
-  }
 
+      if (sessionStorage.getItem("title")) {
+         let title = sessionStorage.getItem("title");
+         filteredSongs = samp.filter((song) => {
+             return String(song.title).toLowerCase().includes(title.toLowerCase());
+         });
+
+     } else if (sessionStorage.getItem("artist")) {
+         let artist = sessionStorage.getItem("artist");
+         filteredSongs = samp.filter((song) => {
+             return song.artist.name == artist;
+         });
+
+     } else if (sessionStorage.getItem("genre")) {
+         let genre = sessionStorage.getItem("genre");
+         filteredSongs = samp.filter((song) => {
+             return song.genre.name == genre;
+         });
+     }
+
+     
+     console.log(filteredSongs);
+
+        filteredSongs ? alphaSortColumn(filteredSongs, "title") : alphaSortColumn(songs, "title");
+
+        //addTableListener("#song-table-body");
+
+  }
 
    let arr = [];
    if (!localStorage.getItem("arr")) {
@@ -25,16 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log('initial playlist', arr);
    }
  
-
-
    const samp = JSON.parse(localStorage.getItem("song"));
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);
    console.log("sessionStorage", sessionStorage);
    let sort = "title";
-
-
 
   function listOutput(title, parent) {
       const opt = document.createElement("option");
@@ -57,41 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
       listOutput(genre.name, document.querySelector("#genreSearch"));
    });
 
-   
-
-//    let searchedSong;
-//    if (sessionStorage.getItem("title")) {
-//       let songTitle = sessionStorage.getItem("title");
-//       searchedSong = samp.filter((song) => {
-//          return String(song.title).includes(songTitle.toLowerCase());
-//       });
-//    }
-//    else if (sessionStorage.getItem("artist")) {
-//       let songArtist = sessionStorage.getItem("artist");
-//       searchedSong = samp.filter((song) => {
-//           return song.artist.name == songArtist;
-//       });
-//   }
-//    else if (sessionStorage.getItem("genre")) {
-//    let songGenre = sessionStorage.getItem("genre");
-//    searchedSong = samp.filter((song) => {
-//        return song.artist.name == songGenre;
-//    });
-// }
-
-//console.log(searchedSong);
-//loadTable();
-   
-
-
 /* note: you may get a CORS error if you try fetching this locally (i.e., directly from a
    local file). To work correctly, this needs to be tested on a local web server.  
    Some possibilities: if using Visual Code, use Live Server extension; if Brackets,
    use built-in Live Preview.
 */
-
-
-
 
    //loading tables
   // function loadTable() {
@@ -123,14 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }  
       sortCalc(samp);
       addPlaylist();
-      
-
    });
-
 //}
 
-
-   //add playlist
+   //add to playlist
    const added = [];
    function addPlaylist(){
       const button = document.querySelectorAll('.addBtn');
@@ -143,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
                console.log(added);
             });
          }
-
    }
    addPlaylist();
 
@@ -160,7 +149,6 @@ function sortCalc(sortWay){
       let textNode = document.createTextNode(headerText);
       header.appendChild(textNode);
       headerRow.appendChild(header);
-
    });
 
    table.appendChild(headerRow);
@@ -201,11 +189,9 @@ function sortCalc(sortWay){
 
       table.appendChild(tr);
    }
-
-   
 }
 
-
+//Check for radio selection 
 if (document.querySelector('input[name="selection"]')) {
    document.querySelectorAll('input[name="selection"]').forEach((elem) => {
      elem.addEventListener("change", function(event) {
@@ -216,6 +202,7 @@ if (document.querySelector('input[name="selection"]')) {
    });
  }
 
+//Hide filters based on Radio selection
 function filterSelect(event) { 
 
       const filter = event.target.value;
@@ -240,119 +227,47 @@ function filterSelect(event) {
       word.forEach(elementType => (elementType.classList.add("hide")));
 }
 
+//Search button works but does not work
+document.querySelector("#filterButton").addEventListener("click", () => {
+   sessionStorage.clear();
+   let form = document.querySelector("#searchType").elements;
+   let searchType;
+   let filter;
 
+   if (form.namedItem("titleSearch").value) {
+       searchType = 'title';
+       filter = form.namedItem("titleSearch").value;
 
+   } else if (form.namedItem("artistSearch").value) {
+       searchType = 'artist';
+       filter = form.namedItem("artistSearch").value;
 
-document.querySelector("#filterButton").addEventListener("click", () => { 
-   const filter = [];
-   
-   const searchForm = document.querySelector("#searchType").elements;
-   
-   let search;
-   let s;
-   
-   
-   if (searchForm.namedItem("Titles").value) {
-      
-      search = searchForm.namedItem("Titles").value;
-      s = samp.find(s => s.title == searchForm.namedItem("Titles").value);
-
+   } else if (form.namedItem("genreSearch").value) {
+       searchType = 'genre';
+       filter = form.namedItem("genreSearch").value;
    }
-   else if (searchForm.namedItem("Artists").value) {
-      
-      search = searchForm.namedItem("Artists").value;
-      s = samp.find(s => s.artist.name == searchForm.namedItem("Artists").value);
-   }
-   else if (searchForm.namedItem("Gen").value) {
-      
-      search = searchForm.namedItem("Gen").value;
-      s = samp.find(s => s.genre.name == searchForm.namedItem("Gen").value);
-   }
-   
-   
-   filter.push(search);
-   alert(filter);
-   
-   const filtered = filter.filter(isBigEnough);
-   
-   //alert(filtered);
-   alert(s.title);
-   alert(s.artist.name);
-   //sortCalc(song);
-   // table.innerHTML = "";
-      let tr = document.createElement('tr');
-      let td = document.createElement('td');
-
-      td.innerHTML = s.title;
-      tr.appendChild(td);
-   
-      let td2 = document.createElement('td');
-
-      td2.innerHTML = s.artist.name;
-      tr.appendChild(td2);
-         
-      let td3 = document.createElement('td');
-
-      td3.innerHTML = s.year;
-      tr.appendChild(td3);
-         
-      let td4 = document.createElement('td');
-
-      td4.innerHTML = s.genre.name;
-      tr.appendChild(td4);
-        
-      let td5 = document.createElement('td');
-
-      td5.innerHTML = s.details.popularity;
-      tr.appendChild(td5);
-         
-      let btn = document.createElement('button');
-   
-      btn.setAttribute('id',s.song_id);
-      btn.setAttribute('class','addBtn');
-      btn.textContent = 'Add';
-      tr.appendChild(btn);
-
-      table.appendChild(tr);
-  
-
-   
+   sessionStorage.setItem(searchType, filter);
 });
 
-
-
-   function isBigEnough(value) {
-      
-      if (value == samp.find()) {
-         return true;
-       }
-      
-   }
 // /document.querySelector("#clearButton").addEventListener("click", sessionStorage.clear());
 //});
 
-
-
-
-
 //load single song view
+function singleSongPageView(songId) {
+   const foundSongData = samp.find(song => song.song_id == songId);
+   //console to check functionality.
+   console.log("This is the found song data", foundSongData);
+   // select parent 
+   const ssParent = document.querySelector('.songview-parent');
+   ssParent.replaceChildren()
+   console.log('ssParent', ssParent);
 
+   ssParent.appendChild(createInfopage(foundSongData));
+   //ssParent.appendChild(createRadarpage(foundSongData));
 
-// for (let c of clickedSong) {
-// const div = document.createElement("div");
-
-// let infoTitle = document.createElement("h1");
-// infoTitle.id = "word";
-
-// infoTitle.textContent = clickedSong.title;
-
-
+   console.log("title:", foundSongData.title);
+   switchDisplay("single-song-page");
+}
 
 
  });
-
-
-
-
-
-

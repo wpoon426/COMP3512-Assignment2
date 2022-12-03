@@ -83,16 +83,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if(e.target == titleSelect){
          samp.sort((a, b) => a.title.localeCompare(b.title));
+         sortCalc(samp);
       }else if (e.target == artSelect){
          samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
+         sortCalc(samp);
       }else if (e.target == yearSelect){
-         samp.sort((a,b) => a.year < b.year?-1:1);
+         samp.sort((a,b) => a.year < b.year?-1:1);sortCalc(samp);
       }else if (e.target == genSelect){
          samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name));
+         sortCalc(samp);
       }else if (e.target == popSelect){
          samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
+         sortCalc(samp);
       }  
-      //sortCalc(samp);
+      
    });
 //}
 
@@ -118,14 +122,15 @@ document.addEventListener("DOMContentLoaded", () => {
     * 
    */
     function rmPlaylist(){
-      const button = document.querySelectorAll('.rmBtn');
+      let playTable = document.querySelector('#playlistView table');
+      const button = document.querySelectorAll('.rmBtn'); 
       for(let b of button){
             b.addEventListener('click',function(e){
                const index = added.findIndex(song => {
                   return song.song_id == b.getAttribute('id');;
               });
               added.splice(index, 1);
-              //rmTable(added);
+              rmTable(added,playTable);
             });
          }
    }
@@ -253,7 +258,7 @@ function sortCalc(sortWay){
    addPlaylist();
 }
 
-function rmTable(songsPassed){
+function rmTable(songsPassed,table){
    table.innerHTML = "";
    let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
    
@@ -305,13 +310,14 @@ function rmTable(songsPassed){
 
       table.appendChild(tr);
    }
+   rmPlaylist();
 }
 
 //Check for radio selection 
 if (document.querySelector('input[name="selection"]')) {
    document.querySelectorAll('input[name="selection"]').forEach((elem) => {
      elem.addEventListener("change", function(event) {
-       var item = event.target.value;
+       let item = event.target.value;
        console.log(item);
        filterSelect(event);
      });
@@ -356,15 +362,15 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
    
    if (document.querySelector('#titleSearch').value) {
        searchType = 'title';
-       filter = form.namedItem("titleSearch").value;
+       filter = document.querySelector('#titleSearch').value;
 
    } else if (document.querySelector('#artistSearch').value) {
        searchType = 'artist';
-       filter = form.namedItem("artistSearch").value;
+       filter = document.querySelector('#artistSearch').value;
 
    } else if (document.querySelector('#genreSearch').value) {
        searchType = 'genre';
-       filter = form.namedItem("genreSearch").value;
+       filter = document.querySelector('#genreSearch').value;
 
    }
    sessionStorage.setItem(searchType, filter);
@@ -373,49 +379,16 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
 
    if (searchType == 'title'){
 
-      // newArray = samp.filter(s => s.title.toLowerCase() == filter);
-      // sortCalc(newArray);
-      // addPlaylist();
-      // form.namedItem("titleSearch").value = '';
-      alert(filter);
-      //const title = filter;
-      for (let song of samp){
-         //console.log("titleLoop");
-         if(song.title.toLowerCase().includes(filter.toLowerCase())){
-            //create song row
-         //    buildSongRow(song);
-         //    //build view song button
-         //    buildViewSongButton(song);
-         //    //build add to playlist button
-         //   AddtoPlaylist(song);
-         //    // add song to table using function
-         //   addSongResult(table, titleTable, title);
-            sortCalc(song);
-            addPlaylist();
-            form.namedItem("titleSearch").value = '';
-
-         
-         }else{
-            //filterList(title);
-            alert('not there');
-            break;
-         }
-      } 
-
-
-
+      newArray = samp.filter(s => s.title.toLowerCase().includes(filter.toLowerCase()));
+      form.namedItem("titleSearch").value = '';
 
    }else if (searchType == 'artist'){
 
       newArray = samp.filter(s => s.artist.name == filter);
-      
-      addPlaylist();
       form.namedItem("artistSearch").value = '';
    }else if (searchType == 'genre'){
 
       newArray = samp.filter(s => s.genre.name == filter);
-      
-      addPlaylist();
       form.namedItem("genreSearch").value = '';
    }  
    sortCalc(newArray);
@@ -432,10 +405,50 @@ document.querySelector("#clearButton").addEventListener("click", function (e){
 
 document.querySelector("#viewPlaylist").addEventListener("click", function(e){
    e.preventDefault();
-   rmTable(added);
-   rmPlaylist();
+  
+   const playView = document.querySelector('#playlistView');
+   const makeTable = document.createElement('table');
+   
+   playView.appendChild(makeTable);
+
+   //selects the new table made in playlist view
+   let playTable = document.querySelector('#playlistView table');
+
+   //variables to access each view
+   let playlistView = document.querySelector("#playlistView");
+   let viewSearch = document.querySelector("#searchView");
+   
+   //unhides playlist view, hides view search 
+   playlistView.classList.toggle('hidden');
+   viewSearch.classList.toggle('hidden');
+
+   rmTable(added, playTable);
+
 }
 );
+
+
+document.querySelector("#clearPlaylist").addEventListener("click", function(e){
+   while (added.length > 0) {
+      added.pop();
+  }
+  let playTable = document.querySelector('#playlistView table');
+  rmTable(added, playTable);
+});
+
+
+document.querySelector("#closePlayview").addEventListener("click", function(e){
+
+   //variables to access each view
+   let playlistView = document.querySelector("#playlistView");
+   let viewSearch = document.querySelector("#searchView");
+
+   //toggling proper views
+   playlistView.classList.toggle('hidden');
+   viewSearch.classList.toggle('hidden');
+
+});
+
 
 
 

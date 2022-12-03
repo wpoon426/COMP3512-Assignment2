@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);
    console.log("sessionStorage", sessionStorage);
-   let sort = "title";
 
   function listOutput(title, parent) {
       const opt = document.createElement("option");
@@ -93,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }else if (e.target == popSelect){
          samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
       }  
-      sortCalc(samp);
+      //sortCalc(samp);
    });
 //}
 
@@ -409,16 +408,17 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
    }else if (searchType == 'artist'){
 
       newArray = samp.filter(s => s.artist.name == filter);
-      sortCalc(newArray);
+      
       addPlaylist();
       form.namedItem("artistSearch").value = '';
    }else if (searchType == 'genre'){
 
       newArray = samp.filter(s => s.genre.name == filter);
-      sortCalc(newArray);
+      
       addPlaylist();
       form.namedItem("genreSearch").value = '';
    }  
+   sortCalc(newArray);
 
 });
 
@@ -459,7 +459,24 @@ function timeDuration(sec) {
    return min + ":" + newSec;
 
 }
-
+   /** 
+    * removes each song from playlist
+    * 
+   */
+    function rmPlaylist(){
+      const button = document.querySelectorAll('.rmBtn');
+      for(let b of button){
+            b.addEventListener('click',function(e){
+               const index = added.findIndex(song => {
+                  return song.song_id == b.getAttribute('id');;
+              });
+              //const title = added[index].title
+              added.splice(index, 1);
+              rmTable(added);
+              e.stopPropagation();
+            });
+         }
+   }
 
 
  });

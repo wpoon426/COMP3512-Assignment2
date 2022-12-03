@@ -117,15 +117,15 @@ document.addEventListener("DOMContentLoaded", () => {
     * removes each song from playlist
     * 
    */
-   function rmPlaylist(){
+    function rmPlaylist(){
       const button = document.querySelectorAll('.rmBtn');
       for(let b of button){
             b.addEventListener('click',function(e){
                const index = added.findIndex(song => {
                   return song.song_id == b.getAttribute('id');;
               });
-              const title = added[index].title
               added.splice(index, 1);
+              //rmTable(added);
             });
          }
    }
@@ -459,24 +459,7 @@ function timeDuration(sec) {
    return min + ":" + newSec;
 
 }
-   /** 
-    * removes each song from playlist
-    * 
-   */
-    function rmPlaylist(){
-      const button = document.querySelectorAll('.rmBtn');
-      for(let b of button){
-            b.addEventListener('click',function(e){
-               const index = added.findIndex(song => {
-                  return song.song_id == b.getAttribute('id');;
-              });
-              //const title = added[index].title
-              added.splice(index, 1);
-              rmTable(added);
-              e.stopPropagation();
-            });
-         }
-   }
+
 
 
  });

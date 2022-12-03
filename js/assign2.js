@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);
-   console.log("sessionStorage", sessionStorage);
+   //console.log("sessionStorage", sessionStorage);
 
   function listOutput(title, parent) {
       const opt = document.createElement("option");
@@ -193,8 +193,8 @@ function sortCalc(sortWay){
          td.addEventListener("click", function() {
             songInfo = document.querySelector("#songView");
             viewSearch = document.querySelector("#searchView");
-            songInfo.hidden = false;
-            viewSearch.hidden = true;
+            songInfo.classList.toggle('hidden');
+            viewSearch.classList.toggle('hidden');
             
             let goBack = document.createElement("button");
             let viewPageTitle = document.createElement("h1");
@@ -256,7 +256,7 @@ function sortCalc(sortWay){
 
             chart.line(sortWay);
 
-            chart.container('container');
+            chart.container('chart');
             chart.draw();
 
 
@@ -276,19 +276,12 @@ function sortCalc(sortWay){
             //  songInfo.append(config);
 
 
-
-
-
-
-
-
-
             goBack.textContent = "Go Back to Search"; 
             songInfo.appendChild(goBack);
             goBack.addEventListener("click", function() { 
 
-               songInfo.hidden = true;
-               viewSearch.hidden = false;
+               songInfo.classList.toggle('hidden');
+               viewSearch.classList.toggle('hidden');
                songInfo.innerHTML = "";
               
             }); 
@@ -402,7 +395,7 @@ function filterSelect(event) {
 //Search button works but does not work
 document.querySelector("#filterButton").addEventListener("click", (e) => {
    e.preventDefault();
-   sessionStorage.clear();
+   //sessionStorage.clear();
    let form = document.querySelector("#searchType").elements;
    let searchType;
    let filter;
@@ -420,7 +413,7 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
        filter = document.querySelector('#genreSearch').value;
 
    }
-   sessionStorage.setItem(searchType, filter);
+   //sessionStorage.setItem(searchType, filter);
 
    let newArray = [];
 
@@ -445,7 +438,7 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
 //clear for now
 document.querySelector("#clearButton").addEventListener("click", function (e){
    e.preventDefault();
-   sessionStorage.clear();
+   //sessionStorage.clear();
    sortCalc(samp);
 
 });

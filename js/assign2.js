@@ -416,6 +416,7 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
 //clear for now
 document.querySelector("#clearButton").addEventListener("click", function (e){
    e.preventDefault();
+   sessionStorage.clear();
    sortCalc(samp);
 
 });

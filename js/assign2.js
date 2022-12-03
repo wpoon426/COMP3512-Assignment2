@@ -247,17 +247,17 @@ function sortCalc(sortWay){
 
 
 
-            let chart = anychart.radar();
-            chart.title("YERRRRRRR");
-            chart.yScale()
-               .minimum(0)
-               .maximum(100)
-               .ticks({'interval':20});
+            // let chart = anychart.radar();
+            // chart.title("YERRRRRRR");
+            // chart.yScale()
+            //    .minimum(0)
+            //    .maximum(100)
+            //    .ticks({'interval':20});
 
-            chart.line(sortWay);
+            // chart.line(sortWay);
 
-            chart.container('chart');
-            chart.draw();
+            // chart.container('chart');
+            // chart.draw();
 
 
             // const config = {

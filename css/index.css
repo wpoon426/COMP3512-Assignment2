@@ -51,3 +51,47 @@ th, td {
 }
 
 
+#table {
+    border: solid black 1px;
+    display: block;
+    width: fit-content;
+    margin: auto;
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 5px 10p 10px green;
+    background-color: lightblue;
+}
+
+
+
+
+#searchView { 
+
+
+}
+
+.searchSelect {
+    text-align: center;
+}
+
+#searchType {
+    margin-top: 10px;
+}
+
+#viewPlaylist {
+    position: relative;
+    left: 455px;
+
+}
+
+#titleSearch, #artistSearch, #genreSearch {
+margin-bottom: 10px;
+}
+
+#buttons {
+    margin-bottom: 10px;
+}
+

@@ -196,7 +196,7 @@ function sortCalc(sortWay){
             songInfo.hidden = false;
             viewSearch.hidden = true;
             
-
+            let goBack = document.createElement("button");
             let viewPageTitle = document.createElement("h1");
             let songTitle = document.createElement("h3");
             let songArtist = document.createElement("h3");
@@ -244,7 +244,54 @@ function sortCalc(sortWay){
             list.appendChild(acoustic);
             list.appendChild(speech);
             list.appendChild(popularity);
-            
+
+
+
+            let chart = anychart.radar();
+            chart.title("YERRRRRRR");
+            chart.yScale()
+               .minimum(0)
+               .maximum(100)
+               .ticks({'interval':20});
+
+            chart.line(sortWay);
+
+            chart.container('container');
+            chart.draw();
+
+
+            // const config = {
+            //    type: 'radar',
+            //    labels: ['Dance', 'Energy', 'Speech', 'Acoustic', 'Liveness', 'Valence'],
+            //    data: [s.analytics.danceability, s.analytics.energy, s.analytics.speechiness, s.analytics.acousticness, s.analytics.liveness, s.analytics.valence],
+            //    options: {
+            //      elements: {
+            //        line: {
+            //          borderWidth: 3
+            //        }
+            //      }
+            //    },
+            //  };        
+             
+            //  songInfo.append(config);
+
+
+
+
+
+
+
+
+
+            goBack.textContent = "Go Back to Search"; 
+            songInfo.appendChild(goBack);
+            goBack.addEventListener("click", function() { 
+
+               songInfo.hidden = true;
+               viewSearch.hidden = false;
+               songInfo.innerHTML = "";
+              
+            }); 
           
             
           

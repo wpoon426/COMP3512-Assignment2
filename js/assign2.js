@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
    // checks too see if the song data exists in localstorage and 
    //if it does not then it will get the songs from the url and put them into a JSON object
+   
+   //added is the playlist array
+   const added = [];
+   
    if (!localStorage.getItem("songs")) {
        const api = "https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php";
        fetch(api)
@@ -13,40 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
       loadSongs(songs)
    }
 
-   //Get Songs function 
-   function getLocalStorage(){
-      return JSON.parse(localStorage.getItem('songs')) || "";
-   }
-
    function loadSongs(data) {
       console.log(data);
       localStorage.setItem("song", JSON.stringify(data));
-
-      if (sessionStorage.getItem("title")) {
-         let title = sessionStorage.getItem("title");
-         filteredSongs = samp.filter((song) => {
-             return String(song.title).toLowerCase().includes(title.toLowerCase());
-         });
-
-     } else if (sessionStorage.getItem("artist")) {
-         let artist = sessionStorage.getItem("artist");
-         filteredSongs = samp.filter((song) => {
-             return song.artist.name == artist;
-         });
-
-     } else if (sessionStorage.getItem("genre")) {
-         let genre = sessionStorage.getItem("genre");
-         filteredSongs = samp.filter((song) => {
-             return song.genre.name == genre;
-         });
-     }
-
-     
-     //console.log(filteredSongs);
-
-       // filteredSongs ? alphaSortColumn(filteredSongs, "title") : alphaSortColumn(songs, "title");
-
-        //addTableListener("#song-table-body");
 
   }
 
@@ -121,48 +94,39 @@ document.addEventListener("DOMContentLoaded", () => {
          samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
       }  
       sortCalc(samp);
-      addPlaylist();
    });
 //}
 
-   //add to playlist
-   const added = [];
+   
    function addPlaylist(){
       const button = document.querySelectorAll('.addBtn');
    
       for(let b of button){
          
             b.addEventListener('click',function(e){
-               const found = samp.find(s => s.song_id ==b.getAttribute('id'));  
-               added.push(found);
-               //console.log(added);
-               //**add toast here */
-
-               //makeSnack("Song Added", "#snack", 3000);
-
+               const found = samp.find(s => s.song_id == b.getAttribute('id'));  
+               if (!added.includes(found)){
+                  added.push(found);
+               }else{
+                  console.log('duplicate');
+               }
             });
          }
    }
-   addPlaylist();
 
+   /** 
+    * removes each song from playlist
+    * 
+   */
    function rmPlaylist(){
       const button = document.querySelectorAll('.rmBtn');
-   
       for(let b of button){
-         
             b.addEventListener('click',function(e){
-               const found = samp.filter(s => s.song_id !==b.getAttribute('id'));  
-               //const found = samp.filter(e => e !== b.getAttribute('id'));
-               
-
-               
-               //var filteredArray = arr.filter(e => e !== 'seven')
-               //added.remove(found);
-               alert(found);
-               //**add toast here */
-
-               //makeSnack("Song Added", "#snack", 3000);
-
+               const index = added.findIndex(song => {
+                  return song.song_id == b.getAttribute('id');;
+              });
+              const title = added[index].title
+              added.splice(index, 1);
             });
          }
    }
@@ -278,6 +242,7 @@ function sortCalc(sortWay){
         });
 
    }
+   addPlaylist();
 }
 
 function rmTable(songsPassed){
@@ -400,10 +365,38 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
 
    if (searchType == 'title'){
 
-      newArray = samp.filter(s => s.title == filter);
-      sortCalc(newArray);
-      addPlaylist();
-      form.namedItem("titleSearch").value = '';
+      // newArray = samp.filter(s => s.title.toLowerCase() == filter);
+      // sortCalc(newArray);
+      // addPlaylist();
+      // form.namedItem("titleSearch").value = '';
+      alert(filter);
+      //const title = filter;
+      for (let song of samp){
+         //console.log("titleLoop");
+         if(song.title.toLowerCase().includes(filter.toLowerCase())){
+            //create song row
+         //    buildSongRow(song);
+         //    //build view song button
+         //    buildViewSongButton(song);
+         //    //build add to playlist button
+         //   AddtoPlaylist(song);
+         //    // add song to table using function
+         //   addSongResult(table, titleTable, title);
+            sortCalc(song);
+            addPlaylist();
+            form.namedItem("titleSearch").value = '';
+
+         
+         }else{
+            //filterList(title);
+            alert('not there');
+            break;
+         }
+      } 
+
+
+
+
    }else if (searchType == 'artist'){
 
       newArray = samp.filter(s => s.artist.name == filter);

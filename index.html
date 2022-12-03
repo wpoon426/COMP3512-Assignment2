@@ -7,19 +7,26 @@
     <script src="js/genres.json"></script>
     <script src="js/sample-songs.json"></script>
     <script src="js/assign2.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js">     </script>
-    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-radar.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     
+    <link rel="stylesheet" href="css/index.css">
 
 </head>
 <body>
     <header>
 
+      <nav>
+        
+        <button id="credits-btn">Credits</button>
+      </nav>
+
     </header>
-    <p>
-        <a href="https://github.com/wpoon426/COMP3512-Assignment2">GitHub Repo</a>
-        <link rel="stylesheet" href="css/index.css">
-    </p>
+
+    <div id="credits-snack">
+      <div>Timothy Ho, Franklin Poon, Shahmir Qaiser</div>
+      <a href="https://github.com/wpoon426/COMP3512-Assignment2">GitHub Repo</a>
+    </div>
+
 
     <article id="searchView">
         <!--artist and genre select lists -->
@@ -76,6 +83,12 @@
         </form>
       </div>
         
+      <div id="added-snack">
+        <div></div>
+        
+      </div>
+
+
 
       <div>
         <div id="table"></div>

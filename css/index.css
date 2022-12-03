@@ -95,3 +95,57 @@ margin-bottom: 10px;
     margin-bottom: 10px;
 }
 
+/* snack for credits */
+#snack.show {
+    visibility: visible;
+    /* Add animation: Take 0.5 seconds to fade in and out.
+    Delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#credits-snack {
+    visibility: hidden;
+    min-width: 200px;
+    margin-left: -125px;
+    background-color: #3ad7da;
+
+    text-align: center;
+   
+    padding: 10px;
+    position: fixed;
+
+    
+}
+
+#credits-snack.show {
+    visibility: visible;
+    -webkit-animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
+    animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
+}
+
+/* snack for songs added */
+#snack.show {
+    visibility: visible;
+    /* Add animation: Take 0.5 seconds to fade in and out.
+    Delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#snack {
+    visibility: hidden;
+
+    background-color: #3ad7da;
+
+    text-align: center;
+   
+    padding: 10px;
+    position: fixed;
+
+    
+}
+
+#snack.show {
+    visibility: visible;
+    -webkit-animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
+    animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
+}

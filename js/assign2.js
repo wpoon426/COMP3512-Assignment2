@@ -110,7 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
                const found = samp.find(s => s.song_id == b.getAttribute('id'));  
                if (!added.includes(found)){
                   added.push(found);
+                  makeSnack('Song Has Been Added', "#snack", 3000);
                }else{
+                  makeSnack('Song Has Already Been Added', "#snack", 3000);
                   console.log('duplicate');
                }
             });
@@ -131,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
               });
               added.splice(index, 1);
               rmTable(added,playTable);
+              makeSnack('Song Has Been Removed', "#snack", 3000);
             });
          }
    }
@@ -490,7 +493,9 @@ document.querySelector("#closePlayview").addEventListener("click", function(e){
 });
 
 
-
+document.querySelector('#credits-btn').addEventListener('mouseover', () => {
+   makeSnack('', "#credits-snack", 5000);
+})
 
 function makeSnack(notify, snackBar, timer) {
    let snack = document.querySelector(snackBar);
@@ -500,6 +505,7 @@ function makeSnack(notify, snackBar, timer) {
    snack.classList.add("show");
    setTimeout(() => { snack.classList.remove("show") }, timer);
 }
+
 
 
 function timeDuration(sec) {

@@ -186,7 +186,7 @@ function sortCalc(sortWay){
    
       btn.setAttribute('id',s.song_id);
       btn.setAttribute('class','addBtn');
-      btn.textContent = 'Add';
+      btn.textContent = '+';
       tr.appendChild(btn);
 
       table.appendChild(tr);

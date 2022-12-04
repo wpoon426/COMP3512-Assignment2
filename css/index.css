@@ -26,24 +26,28 @@ th, td {
     padding: 5px;
 } */
 
+body {
+    background-color:  rgb(156, 233, 185);
+}
+
 #Title:active {
-    background-color: aqua;
+    background-color: #b3b3b3;
 }
 
 #Artist:active {
-    background-color: blueviolet;
+    background-color: #b3b3b3;
 }
 
 #Genre:active {
-    background-color: cornflowerblue
+    background-color: #b3b3b3;
 }
 
 #Year:active {
-    background-color: red
+    background-color: #b3b3b3;
 }
 
 #Popularity:active {
-    background-color: green;
+    background-color: #b3b3b3;
 }
 
 .hide {
@@ -52,43 +56,88 @@ th, td {
 
 
 #table {
-    border: solid black 1px;
-    display: block;
     width: fit-content;
     margin: auto;
-    max-height: 500px;
+    max-height: 650px;
     overflow-y: auto;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 20px;
     text-align: center;
     box-shadow: 0px 5px 10p 10px green;
-    background-color: lightblue;
+    background-color: #191414;
+    color: white;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 10px 10px 10px black;
 }
 
 
-
-
-#searchView { 
-
-
-}
 
 .searchSelect {
     text-align: center;
+    padding: 20px;
 }
 
 #searchType {
-    margin-top: 10px;
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
 }
+
+#rad {
+    background-color: #1DB954;
+    padding: 5px;
+    margin: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#filterButton, #clearButton {
+    margin-top: 10px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+
 
 #viewPlaylist {
     position: relative;
-    left: 455px;
+    left: 700px;
+    background-color: #b3b3b3;
+    font-size: 20px;
+    padding: 30px;
+    border-radius: 20px;
+
+    
+}
+
+#viewPlaylist:hover {
+    background-color: #1DB954;
+    cursor: pointer;
 
 }
 
 #titleSearch, #artistSearch, #genreSearch {
 margin-bottom: 10px;
+font-size: 15px;
+}
+
+#titleLabel, #artistLabel,#genreLabel {
+    font-size: 20px;
+    background-color: #1DB954;
+    width: fit-content;
+    margin: auto;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+   
+    
+
 }
 
 #buttons {
@@ -106,14 +155,24 @@ margin-bottom: 10px;
 #credits-snack {
     visibility: hidden;
     min-width: 200px;
-    margin-left: -125px;
-    background-color: #3ad7da;
-
+    margin-top: 10px;
+    background-color: #1DB954;
     text-align: center;
-   
     padding: 10px;
     position: fixed;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px;
+    
+}
 
+#credits-btn {
+    background-color: #b3b3b3;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 5px;
     
 }
 
@@ -133,19 +192,95 @@ margin-bottom: 10px;
 }
 #snack {
     visibility: hidden;
-
-    background-color: #3ad7da;
-
+    background-color: #1DB954;
     text-align: center;
-   
     padding: 10px;
     position: fixed;
-
-    
+    width: 150px;
+    bottom: 80%;
+    left: 75%;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    border-radius: 10px;
+    box-shadow: 10px 10px;
 }
 
 #snack.show {
     visibility: visible;
     -webkit-animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
     animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
+}
+.btn, .addBtn  {
+    background-color: #b3b3b3;
+    border-radius: 20px;
+    font-size: 20px;
+
+}
+
+.btn:hover, .addBtn:hover {
+    cursor: pointer;
+    background-color: #1DB954;
+}
+
+
+th {
+    font-size: 30px;
+    padding: 20px;
+    border-bottom: solid #1DB954 2px;
+    color: #1DB954;
+    position: sticky;
+    top: 0; 
+    background-color: #191414;
+    
+}
+
+#playlistView {
+    width: fit-content;
+    margin: auto;
+    max-height: 700px;
+    border-radius: 20px;
+    text-align: center;
+    overflow-y: auto;
+    background-color: #191414;
+    color: white;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 10px 10px 10px black;
+}
+
+#clearPlaylist, #closePlayview {
+    padding: 10px;
+}
+
+.rmBtn:hover {
+    cursor: pointer;
+    background-color: #b3b3b3;
+}
+
+.rmBtn {
+    border-radius: 20px;
+    font-size: 20px;
+    background-color: #1DB954;
+    margin-top: 15px;
+    
+}
+
+
+
+tr:nth-child(even) {
+    background-color: #212121; 
+}
+
+tr:hover {
+    background-color: #535353;
+}
+tr {
+    cursor: pointer;
+}
+
+td {
+    border-right: solid #1DB954 1px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }

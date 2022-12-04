@@ -40,37 +40,37 @@
             <option value="filterGenre">Genre</option>
           </select>
         </form> -->
-        <label>
+        <label id="rad">
           <input name="selection" type="radio" value="filterTitle" checked />
           <span>Title</span>
       </label>
       
-      <label>
+      <label id="rad">
           <input name="selection" type="radio" value="filterArtist" />
           <span>Artists</span>
       </label>
       
-      <label>
+      <label id="rad" >
           <input name="selection" type="radio" value="filterGenre" />
           <span>Genres</span>
       </label>
 
         <form id="searchType">
           <div class="filter">
-            <label for="Titles">Title</label>
+            <label id="titleLabel" for="Titles">Title</label>
             <input id="titleSearch" name="Titles">
             
           </div>
 
           <div class="hide filter">
-            <label for="Artists">Artist</label>
+            <label id="artistLabel" for="Artists">Artist</label>
             <select id="artistSearch" name="Artists" >
               <option value="" disabled hidden selected></option>
             </select>
           </div>
 
           <div class="hide filter">
-            <label for="Gen">Genre</label>
+            <label id="genreLabel" for="Gen">Genre</label>
             <select id="genreSearch" name="Gen" >
               <option value="" disabled hidden selected></option>
             </select>

@@ -284,3 +284,11 @@ td {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+#radarContainer{
+    /* justify-content: center; */
+    border: 2px solid;
+    margin: auto;
+    
+
+}

@@ -157,30 +157,30 @@ function sortCalc(sortWay){
    
    for(let s of sortWay) {
       let tr = document.createElement('tr');
-      let td = document.createElement('td');
+      let title = document.createElement('td');
 
-      td.innerHTML = s.title;
-      tr.appendChild(td);
+      title.innerHTML = s.title;
+      tr.appendChild(title);
    
-      let td2 = document.createElement('td');
+      let artist = document.createElement('td');
 
-      td2.innerHTML = s.artist.name;
-      tr.appendChild(td2);
+      artist.innerHTML = s.artist.name;
+      tr.appendChild(artist);
          
-      let td3 = document.createElement('td');
+      let year = document.createElement('td');
 
-      td3.innerHTML = s.year;
-      tr.appendChild(td3);
+      year.innerHTML = s.year;
+      tr.appendChild(year);
          
-      let td4 = document.createElement('td');
+      let genre = document.createElement('td');
 
-      td4.innerHTML = s.genre.name;
-      tr.appendChild(td4);
+      genre.innerHTML = s.genre.name;
+      tr.appendChild(genre);
         
-      let td5 = document.createElement('td');
+      let popularity = document.createElement('td');
 
-      td5.innerHTML = s.details.popularity;
-      tr.appendChild(td5);
+      popularity.innerHTML = s.details.popularity;
+      tr.appendChild(popularity);
          
       let btn = document.createElement('button');
    
@@ -192,8 +192,8 @@ function sortCalc(sortWay){
       table.appendChild(tr);
 
 
-      [td,td2,td3,td4,td5].forEach((td) => {
-         td.addEventListener("click", function() {
+      [title,artist,year,genre,popularity].forEach((title) => {
+         title.addEventListener("click", function() {
             songInfo = document.querySelector("#songView");
             viewSearch = document.querySelector("#searchView");
             songInfo.classList.toggle('hidden');
@@ -248,36 +248,7 @@ function sortCalc(sortWay){
             list.appendChild(speech);
             list.appendChild(popularity);
 
-
-
-            // let chart = anychart.radar();
-            // chart.title("YERRRRRRR");
-            // chart.yScale()
-            //    .minimum(0)
-            //    .maximum(100)
-            //    .ticks({'interval':20});
-
-            // chart.line(sortWay);
-
-            // chart.container('chart');
-            // chart.draw();
-
-
-            // const config = {
-            //    type: 'radar',
-            //    labels: ['Dance', 'Energy', 'Speech', 'Acoustic', 'Liveness', 'Valence'],
-            //    data: [s.analytics.danceability, s.analytics.energy, s.analytics.speechiness, s.analytics.acousticness, s.analytics.liveness, s.analytics.valence],
-            //    options: {
-            //      elements: {
-            //        line: {
-            //          borderWidth: 3
-            //        }
-            //      }
-            //    },
-            //  };        
-             
-            //  songInfo.append(config);
-
+            songInfo.appendChild(makeData(s));
 
             goBack.textContent = "Go Back to Search"; 
             songInfo.appendChild(goBack);
@@ -288,17 +259,104 @@ function sortCalc(sortWay){
                songInfo.innerHTML = "";
               
             }); 
-          
-            
-          
            });
-
-
-
       });
 
    }
    addPlaylist();
+}
+
+
+function makeData(song) {
+   const div = document.createElement("div");
+   let radarDiv = document.createElement("div");
+   radarDiv.id = 'radarContainer';
+   let canvas = document.createElement("canvas");
+   canvas.id = 'radarChart';
+   
+   radarDiv.appendChild(canvas);
+
+   radarDiv.style.width = 500 + "px";
+   radarDiv.style.height = '500px';
+
+   drawChart(canvas, song);
+   div.appendChild(radarDiv);
+   return div;
+}
+
+
+function drawChart(canvas, song) {
+   console.log(song)
+   new Chart(canvas, {
+       type: 'radar',
+       data: {
+
+           labels: ['Dance', 'Energy', 'Speech', 'Acoustic', 'Liveness', 'Valence'],
+           datasets: [{
+               label: 'Song Metrics',
+               data: [song.analytics.danceability, song.analytics.energy, song.analytics.speechiness, song.analytics.acousticness, song.analytics.liveness, song.analytics.valence],
+               fill: true,
+               backgroundColor: 'rgba(30, 215, 96, 0.5)',
+               borderColor: '#1DB954',
+               pointBackgroundColor: '#1DB954',
+               pointBorderColor: '#fff',
+               pointHoverBackgroundColor: '#fff',
+               pointHoverBorderColor: 'rgb(255, 99, 132)'
+           }]
+       },
+       options: {
+         plugins: {
+             legend:{
+                 display: true,
+                 labels: {color: "black"},
+             },
+             title: {
+                 display: true,
+                 text: `'${song.title}'` + " Radar View",
+                 align: 'center',
+                 color: 'black',
+                 font:{
+                     family: 'serif',
+                     color: 'snow',
+                     size: 18,
+                     weight: 'bold'
+                 }
+             }
+         },
+         scales: {
+             r: {
+                 ticks: {
+                     color: "black",
+                     backdropColor: "transparent",
+                     textStrokeWidth: 5,
+                     font:{
+                         family: 'serif',
+                         size: 13
+                     }
+                 },
+                 pointLabels: {
+                     color: 'black',
+                     font:{
+                         family: 'serif',
+                         size: 14,
+                         weight: 'bold'
+                     }
+                 },
+                 grid: {
+                     circular: true,
+                     color: "black"
+                 },
+                 suggestedMin: 0,
+             }
+         },
+         responsive: true,
+         elements: {
+             line: {
+                 borderWidth: 2
+             }
+         }
+     }
+   });
 }
 
 function rmTable(songsPassed,table){
@@ -319,30 +377,30 @@ function rmTable(songsPassed,table){
    
    for(let s of songsPassed) {
       let tr = document.createElement('tr');
-      let td = document.createElement('td');
+      let title = document.createElement('td');
 
-      td.innerHTML = s.title;
-      tr.appendChild(td);
+      title.innerHTML = s.title;
+      tr.appendChild(title);
    
-      let td2 = document.createElement('td');
+      let artist = document.createElement('td');
 
-      td2.innerHTML = s.artist.name;
-      tr.appendChild(td2);
+      artist.innerHTML = s.artist.name;
+      tr.appendChild(artist);
          
-      let td3 = document.createElement('td');
+      let year = document.createElement('td');
 
-      td3.innerHTML = s.year;
-      tr.appendChild(td3);
+      year.innerHTML = s.year;
+      tr.appendChild(year);
          
-      let td4 = document.createElement('td');
+      let genre = document.createElement('td');
 
-      td4.innerHTML = s.genre.name;
-      tr.appendChild(td4);
+      genre.innerHTML = s.genre.name;
+      tr.appendChild(genre);
         
-      let td5 = document.createElement('td');
+      let popularity = document.createElement('td');
 
-      td5.innerHTML = s.details.popularity;
-      tr.appendChild(td5);
+      popularity.innerHTML = s.details.popularity;
+      tr.appendChild(popularity);
          
       let btn = document.createElement('button');
    
@@ -378,8 +436,6 @@ function filterSelect(event) {
       const word = [];
       console.log(filter);
 
-      let form = document.querySelector("#searchType").elements;
-
       if (filter == "filterTitle") {
          word.push(document.querySelector("#artistSearch").parentElement);
          word.push(document.querySelector("#genreSearch").parentElement);
@@ -398,8 +454,6 @@ function filterSelect(event) {
 //Search button works but does not work
 document.querySelector("#filterButton").addEventListener("click", (e) => {
    e.preventDefault();
-   //sessionStorage.clear();
-   let form = document.querySelector("#searchType").elements;
    let searchType;
    let filter;
    
@@ -414,34 +468,30 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
    } else if (document.querySelector('#genreSearch').value) {
        searchType = 'genre';
        filter = document.querySelector('#genreSearch').value;
-
    }
-   //sessionStorage.setItem(searchType, filter);
 
+   //creates new array to generate table
    let newArray = [];
 
    if (searchType == 'title'){
-
       newArray = samp.filter(s => s.title.toLowerCase().includes(filter.toLowerCase()));
-      form.namedItem("titleSearch").value = '';
+      document.querySelector('#titleSearch').value = '';
 
    }else if (searchType == 'artist'){
 
       newArray = samp.filter(s => s.artist.name == filter);
-      form.namedItem("artistSearch").value = '';
+      document.querySelector('#artistSearch').value = '';
    }else if (searchType == 'genre'){
 
       newArray = samp.filter(s => s.genre.name == filter);
-      form.namedItem("genreSearch").value = '';
+      document.querySelector('#genreSearch').value = '';
    }  
    sortCalc(newArray);
-
 });
 
-//clear for now
+//clear s
 document.querySelector("#clearButton").addEventListener("click", function (e){
    e.preventDefault();
-   //sessionStorage.clear();
    sortCalc(samp);
 
 });
@@ -471,7 +521,7 @@ document.querySelector("#viewPlaylist").addEventListener("click", function(e){
 );
 
 
-document.querySelector("#clearPlaylist").addEventListener("click", function(e){
+document.querySelector("#clearPlaylist").addEventListener("click", function(){
    while (added.length > 0) {
       added.pop();
   }
@@ -480,7 +530,7 @@ document.querySelector("#clearPlaylist").addEventListener("click", function(e){
 });
 
 
-document.querySelector("#closePlayview").addEventListener("click", function(e){
+document.querySelector("#closePlayview").addEventListener("click", function(){
 
    //variables to access each view
    let playlistView = document.querySelector("#playlistView");

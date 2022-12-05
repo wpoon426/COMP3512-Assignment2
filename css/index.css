@@ -132,6 +132,12 @@ body {
 #titleSearch, #artistSearch, #genreSearch {
 margin-bottom: 10px;
 font-size: 15px;
+background-color: #8f8787;
+border: solid #1DB954 1px; 
+font-weight: 600;
+border-radius: 5px;
+padding: 4px;
+box-shadow: 5px 5px 10px #1DB954;
 }
 
 #titleLabel, #artistLabel,#genreLabel {
@@ -305,16 +311,19 @@ li {
     border-radius: 10px;
     padding: 5px;
     font-size: 20px;
-    
+   
     
    
 }
 
 #radarContainer{
-    margin: auto;
+    
     background-color: #212121;
     border-radius: 10px;
     box-shadow: 5px 5px 10px #1DB954;
+    margin: auto;
+    
+    
 }
 
 .infoBackButton {
@@ -355,6 +364,10 @@ li {
     grid-template-rows: 1fr 1fr;
     gap: 50px;
     margin: 50px;
+    
+
+
+    
     
     
     

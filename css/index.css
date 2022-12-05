@@ -27,7 +27,9 @@ th, td {
 } */
 
 body {
-    background-color:  rgb(156, 233, 185);
+    background-image: linear-gradient(to right, #414141, #000000);
+    
+    
 }
 
 #Title:active {
@@ -67,7 +69,13 @@ body {
     color: white;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    box-shadow: 10px 10px 10px black;
+    box-shadow: 10px 10px 10px #1DB954;
+    margin-bottom: 100px;
+   
+}
+
+#table::-webkit-scrollbar {
+    display: none;
 }
 
 
@@ -246,11 +254,15 @@ th {
     color: white;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    box-shadow: 10px 10px 10px black;
+    box-shadow: 10px 10px 10px #1DB954;
 }
 
 #clearPlaylist, #closePlayview {
     padding: 10px;
+}
+
+#playlistView::-webkit-scrollbar {
+    display: none;
 }
 
 .rmBtn:hover {
@@ -285,10 +297,65 @@ td {
     padding-bottom: 20px;
 }
 
-#radarContainer{
-    /* justify-content: center; */
-    border: 2px solid;
-    margin: auto;
-    
 
+li {
+    list-style-type: none;
+    background-color: #1DB954;
+    color: #191414;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+    
+    
+   
+}
+
+#radarContainer{
+    margin: auto;
+    background-color: #212121;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #1DB954;
+}
+
+.infoBackButton {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    border-radius: 20px;
+    font-size: 20px;
+    background-color: #b3b3b3;
+    margin-top: 15px;
+    padding: 10px;
+
+}
+.infoBackButton:hover {
+    cursor: pointer;
+    background-color: #1DB954;
+}
+
+
+.songInfo {
+    border: solid black 1px;
+    margin: auto;
+    width: 50%;
+    margin-bottom: 30px;
+    text-align: center;
+    background-color: #212121;
+    color: #1DB954;
+    border-radius: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    box-shadow: 10px 10px 10px;
+    
+}
+
+.songDetails {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 50px;
+    margin: 50px;
+    
+    
+    
 }

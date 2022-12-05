@@ -215,6 +215,11 @@ function sortCalc(sortWay){
             let speech = document.createElement("li");
             let popularity = document.createElement("li");
             let list = document.createElement("ul");
+            let infoDiv = document.createElement("div");
+            infoDiv.setAttribute("class", "songInfo");
+            let songDetails = document.createElement("div");
+            songDetails.setAttribute("class", "songDetails");
+
           
             viewPageTitle.textContent = "Song Information";
             songTitle.textContent = "Title:  " + s.title;
@@ -222,35 +227,38 @@ function sortCalc(sortWay){
             songGenre.textContent = "Genre:  " + s.genre.name;
             songYear.textContent = "Year:  " + s.year;
             songDuration.textContent = "Duration:  " + timeDuration(s.details.duration);
-            songInfo.appendChild(viewPageTitle);
-            songInfo.appendChild(songTitle);
-            songInfo.appendChild(songArtist);
-            songInfo.appendChild(songGenre);
-            songInfo.appendChild(songYear);
-            songInfo.appendChild(songDuration);
+            infoDiv.appendChild(viewPageTitle);
+            infoDiv.appendChild(songTitle);
+            infoDiv.appendChild(songArtist);
+            infoDiv.appendChild(songGenre);
+            infoDiv.appendChild(songYear);
+            infoDiv.appendChild(songDuration);
+            songInfo.appendChild(infoDiv);
+            infoDiv.appendChild(songDetails);
           
             bpm.textContent =  "BPM:  " + s.details.bpm;
-            energy.textContent = "Energy  " + s.analytics.energy;
-            dance.textContent = "Danceability  " + s.analytics.danceability;
-            liveness.textContent = "Liveness  " + s.analytics.liveness;
-            valence.textContent = "Valence  " + s.analytics.valence;
-            acoustic.textContent = "Acousticness  " + s.analytics.acousticness;
-            speech.textContent = "Speechiness  " + s.analytics.speechiness;
-            popularity.textContent = "Popularity  " + s.details.popularity;
+            energy.textContent = "Energy:  " + s.analytics.energy;
+            dance.textContent = "Danceability:  " + s.analytics.danceability;
+            liveness.textContent = "Liveness:  " + s.analytics.liveness;
+            valence.textContent = "Valence:  " + s.analytics.valence;
+            acoustic.textContent = "Acousticness:  " + s.analytics.acousticness;
+            speech.textContent = "Speechiness:  " + s.analytics.speechiness;
+            popularity.textContent = "Popularity:  " + s.details.popularity;
           
-            songInfo.appendChild(list);
-            list.appendChild(bpm);
-            list.appendChild(energy);
-            list.appendChild(dance);
-            list.appendChild(liveness);
-            list.appendChild(valence);
-            list.appendChild(acoustic);
-            list.appendChild(speech);
-            list.appendChild(popularity);
+            
+            songDetails.appendChild(bpm);
+            songDetails.appendChild(energy);
+            songDetails.appendChild(dance);
+            songDetails.appendChild(liveness);
+            songDetails.appendChild(valence);
+            songDetails.appendChild(acoustic);
+            songDetails.appendChild(speech);
+            songDetails.appendChild(popularity);
 
             songInfo.appendChild(makeData(s));
 
             goBack.textContent = "Go Back to Search"; 
+            goBack.setAttribute("class", "infoBackButton");
             songInfo.appendChild(goBack);
             goBack.addEventListener("click", function() { 
 
@@ -308,13 +316,13 @@ function drawChart(canvas, song) {
          plugins: {
              legend:{
                  display: true,
-                 labels: {color: "black"},
+                 labels: {color: "white"},
              },
              title: {
                  display: true,
                  text: `'${song.title}'` + " Radar View",
                  align: 'center',
-                 color: 'black',
+                 color: 'white',
                  font:{
                      family: 'serif',
                      color: 'snow',
@@ -326,7 +334,7 @@ function drawChart(canvas, song) {
          scales: {
              r: {
                  ticks: {
-                     color: "black",
+                     color: "white",
                      backdropColor: "transparent",
                      textStrokeWidth: 5,
                      font:{
@@ -335,7 +343,7 @@ function drawChart(canvas, song) {
                      }
                  },
                  pointLabels: {
-                     color: 'black',
+                     color: 'white',
                      font:{
                          family: 'serif',
                          size: 14,
@@ -344,7 +352,7 @@ function drawChart(canvas, song) {
                  },
                  grid: {
                      circular: true,
-                     color: "black"
+                     color: "white"
                  },
                  suggestedMin: 0,
              }

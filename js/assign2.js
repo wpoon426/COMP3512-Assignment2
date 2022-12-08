@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
    }
  
    //parses the data
-   const samp = JSON.parse(localStorage.getItem("songs"));
+   const samp = JSON.parse(localStorage.getItem("song"));
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);

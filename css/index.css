@@ -2,34 +2,8 @@
     display:none;
 }
 
-
-/* table { 
-    border: solid black 1px;
-} */
-/* 
-body {
-    text-align: center;
-}
-div {
-    display: inline-block;
-}
-button {
-    display: inline-block;
-    padding: 10px 20px;
-}
-#table {
-    display: block;
-    margin-top: 20px;
-}
-th, td {
-    border: 1px solid black;
-    padding: 5px;
-} */
-
 body {
     background-image: linear-gradient(to right, #414141, #000000);
-    
-    
 }
 
 #Title:active {
@@ -56,7 +30,6 @@ body {
     display: none;
 }
 
-
 #table {
     width: fit-content;
     margin: auto;
@@ -77,8 +50,6 @@ body {
 #table::-webkit-scrollbar {
     display: none;
 }
-
-
 
 .searchSelect {
     text-align: center;
@@ -110,23 +81,18 @@ body {
     margin-right: 10px;
 }
 
-
-
 #viewPlaylist {
     position: relative;
-    left: 700px;
     background-color: #b3b3b3;
     font-size: 20px;
     padding: 30px;
+    margin-bottom: 10px;
     border-radius: 20px;
-
-    
 }
 
 #viewPlaylist:hover {
     background-color: #1DB954;
     cursor: pointer;
-
 }
 
 #titleSearch, #artistSearch, #genreSearch {
@@ -149,23 +115,12 @@ box-shadow: 5px 5px 10px #1DB954;
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 10px;
-   
-    
-
 }
 
 #buttons {
     margin-bottom: 10px;
 }
 
-/* snack for credits */
-#snack.show {
-    visibility: visible;
-    /* Add animation: Take 0.5 seconds to fade in and out.
-    Delay the fade out process for 2.5 seconds */
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
 #credits-snack {
     visibility: hidden;
     min-width: 200px;
@@ -179,7 +134,6 @@ box-shadow: 5px 5px 10px #1DB954;
     font-weight: 400;
     border-radius: 10px;
     box-shadow: 10px 10px 10px;
-    
 }
 
 #credits-btn {
@@ -187,23 +141,13 @@ box-shadow: 5px 5px 10px #1DB954;
     border-radius: 20px;
     font-size: 20px;
     padding: 5px;
-    
 }
 
-#credits-snack.show {
+#credits-snack.show, #snack.show {
     visibility: visible;
-    -webkit-animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
-    animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
 }
 
 /* snack for songs added */
-#snack.show {
-    visibility: visible;
-    /* Add animation: Take 0.5 seconds to fade in and out.
-    Delay the fade out process for 2.5 seconds */
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
 #snack {
     visibility: hidden;
     background-color: #1DB954;
@@ -220,23 +164,16 @@ box-shadow: 5px 5px 10px #1DB954;
     box-shadow: 10px 10px;
 }
 
-#snack.show {
-    visibility: visible;
-    -webkit-animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
-    animation: fadein2 0.5s, fadeout2 0.5s 4.5s;
-}
 .btn, .addBtn  {
     background-color: #b3b3b3;
     border-radius: 20px;
     font-size: 20px;
-
 }
 
 .btn:hover, .addBtn:hover {
     cursor: pointer;
     background-color: #1DB954;
 }
-
 
 th {
     font-size: 30px;
@@ -246,7 +183,6 @@ th {
     position: sticky;
     top: 0; 
     background-color: #191414;
-    
 }
 
 #playlistView {
@@ -281,10 +217,7 @@ th {
     font-size: 20px;
     background-color: #1DB954;
     margin-top: 15px;
-    
 }
-
-
 
 tr:nth-child(even) {
     background-color: #212121; 
@@ -303,7 +236,6 @@ td {
     padding-bottom: 20px;
 }
 
-
 li {
     list-style-type: none;
     background-color: #1DB954;
@@ -311,29 +243,22 @@ li {
     border-radius: 10px;
     padding: 5px;
     font-size: 20px;
-   
-    
-   
 }
 
 #radarContainer{
-    
     background-color: #212121;
     border-radius: 10px;
     box-shadow: 5px 5px 10px #1DB954;
     margin: auto;
-    
-    
 }
 
 .infoBackButton {
-    position: absolute;
-    top: 50px;
-    right: 100px;
+    float:right;
     border-radius: 20px;
     font-size: 20px;
     background-color: #b3b3b3;
     margin-top: 15px;
+    margin-right: 20px;
     padding: 10px;
 
 }
@@ -341,7 +266,6 @@ li {
     cursor: pointer;
     background-color: #1DB954;
 }
-
 
 .songInfo {
     border: solid black 1px;
@@ -355,20 +279,11 @@ li {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 400;
     box-shadow: 10px 10px 10px;
-    
 }
 
 .songDetails {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 50px;
     margin: 50px;
-    
-
-
-    
-    
-    
-    
 }

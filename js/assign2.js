@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
       loadSongs(songs)
    }
 
+   /**
+    * function to load songs data
+    * @param {*} data 
+    */
    function loadSongs(data) {
       console.log(data);
       localStorage.setItem("song", JSON.stringify(data));
@@ -37,6 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
    console.log("songs object", samp);
    //console.log("sessionStorage", sessionStorage);
 
+   /**
+    * function to create the different filter options
+    * @param {*} title 
+    * @param {*} parent 
+    */
   function listOutput(title, parent) {
       const opt = document.createElement("option");
       opt.value = title;
@@ -58,19 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
       listOutput(genre.name, document.querySelector("#genreSearch"));
    });
 
-/* note: you may get a CORS error if you try fetching this locally (i.e., directly from a
-   local file). To work correctly, this needs to be tested on a local web server.  
-   Some possibilities: if using Visual Code, use Live Server extension; if Brackets,
-   use built-in Live Preview.
-*/
-
    //loading tables
-  // function loadTable() {
+   // function loadTable() {
    const table = document.querySelector('#table');
 
    let column = document.querySelector('#table');
    const titleSort = samp.sort((a, b) => a.title.localeCompare(b.title));
-   sortCalc(titleSort);
+   genTable(titleSort);
 
    column.addEventListener('click', function(e){
          
@@ -80,27 +83,25 @@ document.addEventListener("DOMContentLoaded", () => {
       let genSelect = document.querySelector('#Genre');
       let popSelect = document.querySelector('#Popularity');
 
-
       if(e.target == titleSelect){
          samp.sort((a, b) => a.title.localeCompare(b.title));
-         sortCalc(samp);
+         genTable(samp);
       }else if (e.target == artSelect){
          samp.sort((a, b) => a.artist.name.localeCompare(b.artist.name));
-         sortCalc(samp);
+         genTable(samp);
       }else if (e.target == yearSelect){
-         samp.sort((a,b) => a.year < b.year?-1:1);sortCalc(samp);
+         samp.sort((a,b) => a.year < b.year?-1:1);genTable(samp);
       }else if (e.target == genSelect){
          samp.sort((a, b) => a.genre.name.localeCompare(b.genre.name));
-         sortCalc(samp);
+         genTable(samp);
       }else if (e.target == popSelect){
          samp.sort((a,b) => a.details.popularity > b.details.popularity?-1:1);
-         sortCalc(samp);
+         genTable(samp);
       }  
-      
    });
-//}
-
-   
+   /**
+    * Function to create add button to add songs to playlist
+    */
    function addPlaylist(){
       const button = document.querySelectorAll('.addBtn');
    
@@ -118,11 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
          }
    }
-
-   /** 
-    * removes each song from playlist
-    * 
-   */
+   /**
+    * Removes each song from playlist
+    */
     function rmPlaylist(){
       let playTable = document.querySelector('#playlistView table');
       const button = document.querySelectorAll('.rmBtn'); 
@@ -137,9 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
             });
          }
    }
-
-//sorting based on params
-function sortCalc(sortWay){
+/**
+ * function to sort the main view table and create it
+ * @param {*} songArray 
+ */
+function genTable(songArray){
    table.innerHTML = "";
    let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
    
@@ -155,7 +156,7 @@ function sortCalc(sortWay){
 
    table.appendChild(headerRow);
    
-   for(let s of sortWay) {
+   for(let s of songArray) {
       let tr = document.createElement('tr');
       let title = document.createElement('td');
 
@@ -183,15 +184,14 @@ function sortCalc(sortWay){
       tr.appendChild(popularity);
          
       let btn = document.createElement('button');
-   
+      
       btn.setAttribute('id',s.song_id);
       btn.setAttribute('class','addBtn');
       btn.textContent = '+';
       tr.appendChild(btn);
-
+      
       table.appendChild(tr);
-
-
+      
       [title,artist,year,genre,popularity].forEach((title) => {
          title.addEventListener("click", function() {
             songInfo = document.querySelector("#songView");
@@ -219,8 +219,18 @@ function sortCalc(sortWay){
             infoDiv.setAttribute("class", "songInfo");
             let songDetails = document.createElement("div");
             songDetails.setAttribute("class", "songDetails");
+            
+            goBack.textContent = "Go Back to Search"; 
+            goBack.setAttribute("class", "infoBackButton");
+            songInfo.appendChild(goBack);
+            goBack.addEventListener("click", function() { 
+      
+               songInfo.classList.toggle('hidden');
+               viewSearch.classList.toggle('hidden');
+               songInfo.innerHTML = "";
+              
+            }); 
 
-          
             viewPageTitle.textContent = "Song Information";
             songTitle.textContent = "Title:  " + s.title;
             songArtist.textContent = "Artist:  " + s.artist.name;
@@ -244,7 +254,6 @@ function sortCalc(sortWay){
             acoustic.textContent = "Acousticness:  " + s.analytics.acousticness;
             speech.textContent = "Speechiness:  " + s.analytics.speechiness;
             popularity.textContent = "Popularity:  " + s.details.popularity;
-          
             
             songDetails.appendChild(bpm);
             songDetails.appendChild(energy);
@@ -257,30 +266,23 @@ function sortCalc(sortWay){
 
             songInfo.appendChild(makeData(s));
 
-            goBack.textContent = "Go Back to Search"; 
-            goBack.setAttribute("class", "infoBackButton");
-            songInfo.appendChild(goBack);
-            goBack.addEventListener("click", function() { 
-
-               songInfo.classList.toggle('hidden');
-               viewSearch.classList.toggle('hidden');
-               songInfo.innerHTML = "";
-              
-            }); 
            });
       });
-
    }
    addPlaylist();
 }
 
-
+/**
+ * function to create the radar chart 
+ * @param {*} song 
+ * @returns 
+ */
 function makeData(song) {
    const div = document.createElement("div");
    let radarDiv = document.createElement("div");
-   radarDiv.id = 'radarContainer';
+   radarDiv.setAttribute('id', 'radarContainer');
    let canvas = document.createElement("canvas");
-   canvas.id = 'radarChart';
+   canvas.setAttribute('id', 'radarChart');
    
    radarDiv.appendChild(canvas);
 
@@ -292,7 +294,12 @@ function makeData(song) {
    return div;
 }
 
-
+/**
+ * function to create a radar which shows all the analytics 
+ * of the clicked song
+ * @param {*} canvas 
+ * @param {*} song 
+ */
 function drawChart(canvas, song) {
    console.log(song)
    new Chart(canvas, {
@@ -301,7 +308,7 @@ function drawChart(canvas, song) {
 
            labels: ['Dance', 'Energy', 'Speech', 'Acoustic', 'Liveness', 'Valence'],
            datasets: [{
-               label: 'Song Metrics',
+               label: 'Song Analytics',
                data: [song.analytics.danceability, song.analytics.energy, song.analytics.speechiness, song.analytics.acousticness, song.analytics.liveness, song.analytics.valence],
                fill: true,
                backgroundColor: 'rgba(30, 215, 96, 0.5)',
@@ -320,14 +327,14 @@ function drawChart(canvas, song) {
              },
              title: {
                  display: true,
-                 text: `'${song.title}'` + " Radar View",
+                 text: `${song.title}`,
                  align: 'center',
                  color: 'white',
                  font:{
                      family: 'serif',
-                     color: 'snow',
-                     size: 18,
-                     weight: 'bold'
+                     color: 'white',
+                     size: 20,
+                     weight: 400
                  }
              }
          },
@@ -367,6 +374,12 @@ function drawChart(canvas, song) {
    });
 }
 
+/**
+ * Function to generate table for the playlistview 
+ * 
+ * @param {*} songsPassed 
+ * @param {*} table 
+ */
 function rmTable(songsPassed,table){
    table.innerHTML = "";
    let headers = ['Title', 'Artist', 'Year', 'Genre', 'Popularity', 'Playlist'];
@@ -418,8 +431,91 @@ function rmTable(songsPassed,table){
       tr.appendChild(btn);
 
       table.appendChild(tr);
+
+      [title,artist,year,genre,popularity].forEach((title) => {
+         title.addEventListener("click", function() {
+            songInfo = document.querySelector("#songView");
+            preview = document.querySelector("#playlistView");
+            songInfo.classList.toggle('hidden');
+            preview.classList.toggle('hidden');
+            
+            let goBack = document.createElement("button");
+            let viewPageTitle = document.createElement("h1");
+            let songTitle = document.createElement("h3");
+            let songArtist = document.createElement("h3");
+            let songGenre = document.createElement("h3");
+            let songYear = document.createElement("h3");
+            let songDuration = document.createElement("h3");
+            let bpm = document.createElement("li");
+            let energy = document.createElement("li");
+            let dance = document.createElement("li");
+            let liveness = document.createElement("li");
+            let valence = document.createElement("li");
+            let acoustic = document.createElement("li");
+            let speech = document.createElement("li");
+            let popularity = document.createElement("li");
+            let list = document.createElement("ul");
+            let infoDiv = document.createElement("div");
+            infoDiv.setAttribute("class", "songInfo");
+            let songDetails = document.createElement("div");
+            songDetails.setAttribute("class", "songDetails");
+            
+            //Go back to playlist button
+            goBack.textContent = "Go Back to Playlist"; 
+            goBack.setAttribute("class", "infoBackButton");
+            songInfo.appendChild(goBack);
+            goBack.addEventListener("click", function() { 
+
+               songInfo.classList.toggle('hidden');
+               preview.classList.toggle('hidden');
+               songInfo.innerHTML = "";
+              
+            }); 
+
+            viewPageTitle.textContent = "Song Information";
+            songTitle.textContent = "Title:  " + s.title;
+            songArtist.textContent = "Artist:  " + s.artist.name;
+            songGenre.textContent = "Genre:  " + s.genre.name;
+            songYear.textContent = "Year:  " + s.year;
+            songDuration.textContent = "Duration:  " + timeDuration(s.details.duration);
+            infoDiv.appendChild(viewPageTitle);
+            infoDiv.appendChild(songTitle);
+            infoDiv.appendChild(songArtist);
+            infoDiv.appendChild(songGenre);
+            infoDiv.appendChild(songYear);
+            infoDiv.appendChild(songDuration);
+            songInfo.appendChild(infoDiv);
+            infoDiv.appendChild(songDetails);
+          
+            bpm.textContent =  "BPM:  " + s.details.bpm;
+            energy.textContent = "Energy:  " + s.analytics.energy;
+            dance.textContent = "Danceability:  " + s.analytics.danceability;
+            liveness.textContent = "Liveness:  " + s.analytics.liveness;
+            valence.textContent = "Valence:  " + s.analytics.valence;
+            acoustic.textContent = "Acousticness:  " + s.analytics.acousticness;
+            speech.textContent = "Speechiness:  " + s.analytics.speechiness;
+            popularity.textContent = "Popularity:  " + s.details.popularity;
+            
+            songDetails.appendChild(bpm);
+            songDetails.appendChild(energy);
+            songDetails.appendChild(dance);
+            songDetails.appendChild(liveness);
+            songDetails.appendChild(valence);
+            songDetails.appendChild(acoustic);
+            songDetails.appendChild(speech);
+            songDetails.appendChild(popularity);
+
+            songInfo.appendChild(makeData(s));
+
+           });
+      });
    }
    rmPlaylist();
+   
+   //Shows how many songs are in the playlist currently
+   let playAvgInfo = document.querySelector('#playlistInfo');
+   
+   playAvgInfo.innerHTML = `Songs in Playlist : ${added.length}`;
 }
 
 //Check for radio selection 
@@ -459,7 +555,7 @@ function filterSelect(event) {
       word.forEach(elementType => (elementType.classList.add("hide")));
 }
 
-//Search button works but does not work
+//Filter button to apply current filters and search
 document.querySelector("#filterButton").addEventListener("click", (e) => {
    e.preventDefault();
    let searchType;
@@ -494,16 +590,16 @@ document.querySelector("#filterButton").addEventListener("click", (e) => {
       newArray = samp.filter(s => s.genre.name == filter);
       document.querySelector('#genreSearch').value = '';
    }  
-   sortCalc(newArray);
+   genTable(newArray);
 });
 
-//clear s
+//clear button to clear filters on mainview
 document.querySelector("#clearButton").addEventListener("click", function (e){
    e.preventDefault();
-   sortCalc(samp);
+   genTable(samp);
 
 });
-
+//view playlist button to go to the playlist view
 document.querySelector("#viewPlaylist").addEventListener("click", function(e){
    e.preventDefault();
   
@@ -524,12 +620,12 @@ document.querySelector("#viewPlaylist").addEventListener("click", function(e){
    viewSearch.classList.toggle('hidden');
 
    rmTable(added, playTable);
-
 }
 );
 
-
+//clear playlist button to clear songs in playlist
 document.querySelector("#clearPlaylist").addEventListener("click", function(){
+   //looks at length of added songs array and removes each song
    while (added.length > 0) {
       added.pop();
   }
@@ -537,7 +633,7 @@ document.querySelector("#clearPlaylist").addEventListener("click", function(){
   rmTable(added, playTable);
 });
 
-
+//button to close the playlist view and go back to main view
 document.querySelector("#closePlayview").addEventListener("click", function(){
 
    //variables to access each view
@@ -550,11 +646,16 @@ document.querySelector("#closePlayview").addEventListener("click", function(){
 
 });
 
-
+//credits button 
 document.querySelector('#credits-btn').addEventListener('mouseover', () => {
    makeSnack('', "#credits-snack", 5000);
 })
-
+/**Function to make snackbar
+ * 
+ * @param {*} notify 
+ * @param {*} snackBar 
+ * @param {*} timer How long it will display for
+ */
 function makeSnack(notify, snackBar, timer) {
    let snack = document.querySelector(snackBar);
    if (snackBar == '#snack') {
@@ -564,19 +665,16 @@ function makeSnack(notify, snackBar, timer) {
    setTimeout(() => { snack.classList.remove("show") }, timer);
 }
 
-
-
+/**
+ * function to convert the song length in minutes and seconds
+ * @param {*} sec 
+ * @returns 
+ */
 function timeDuration(sec) {
    let min = Math.floor(sec / 60);
    newSec = sec % 60;
-
    min = min < 10 ? + min : min;
    newSec = newSec < 10 ? "0" + newSec : newSec;
-
    return min + ":" + newSec;
-
 }
-
-
-
  });

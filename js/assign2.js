@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     */
    function loadSongs(data) {
       console.log(data);
-      localStorage.setItem("songs", JSON.stringify(data));
+      localStorage.setItem("song", JSON.stringify(data));
 
   }
 
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log('initial playlist', arr);
    }
  
-   const samp = JSON.parse(localStorage.getItem("songs"));
+   const samp = JSON.parse(localStorage.getItem("song"));
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);

@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
    
       for(let b of button){
          
-            b.addEventListener('click',function(e){
+            b.addEventListener('click',function(){
                const found = samp.find(s => s.song_id == b.getAttribute('id'));  
                if (!added.includes(found)){
                   added.push(found);
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let playTable = document.querySelector('#playlistView table');
       const button = document.querySelectorAll('.rmBtn'); 
       for(let b of button){
-            b.addEventListener('click',function(e){
+            b.addEventListener('click',function(){
                const index = added.findIndex(song => {
                   return song.song_id == b.getAttribute('id');;
               });
@@ -214,7 +214,6 @@ function genTable(songArray){
             let acoustic = document.createElement("li");
             let speech = document.createElement("li");
             let popularity = document.createElement("li");
-            let list = document.createElement("ul");
             let infoDiv = document.createElement("div");
             infoDiv.setAttribute("class", "songInfo");
             let songDetails = document.createElement("div");
@@ -454,7 +453,6 @@ function rmTable(songsPassed,table){
             let acoustic = document.createElement("li");
             let speech = document.createElement("li");
             let popularity = document.createElement("li");
-            let list = document.createElement("ul");
             let infoDiv = document.createElement("div");
             infoDiv.setAttribute("class", "songInfo");
             let songDetails = document.createElement("div");

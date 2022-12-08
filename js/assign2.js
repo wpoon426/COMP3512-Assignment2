@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log('initial playlist', arr);
    }
  
-   const samp = JSON.parse(localStorage.getItem("song"));
+   const samp = JSON.parse(localStorage.getItem("songs"));
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);

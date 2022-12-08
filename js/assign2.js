@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
                loadSongs(data)
            })
    }
-   // else{
-   // //    songs = JSON.parse(localStorage.getItem("songs"))
-   // //    loadSongs(songs)
-   // // }
+   else{
+      songs = JSON.parse(localStorage.getItem("songs"))
+      loadSongs(songs)
+   }
 
    /**
     * function to load songs data
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log('initial playlist', arr);
    }
  
-   const samp = JSON.parse(localStorage.getItem("songs"));
+   const samp = JSON.parse(localStorage.getItem("song"));
    const art = JSON.parse(artists);
    const gen = JSON.parse(genres); 
    console.log("songs object", samp);

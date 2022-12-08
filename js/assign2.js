@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     */
    function loadSongs(data) {
       console.log(data);
-      localStorage.setItem("song", JSON.stringify(data));
+      localStorage.setItem("songs", JSON.stringify(data));
 
   }
 

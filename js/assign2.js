@@ -12,10 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
            .then(data => {
                loadSongs(data)
            })
-   }else{
-      songs = JSON.parse(localStorage.getItem("songs"))
-      loadSongs(songs)
    }
+   // else{
+   // //    songs = JSON.parse(localStorage.getItem("songs"))
+   // //    loadSongs(songs)
+   // // }
 
    /**
     * function to load songs data

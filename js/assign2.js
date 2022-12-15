@@ -13,9 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
                loadSongs(data)
            })
       
-   }
-   else{
-      songs = JSON.parse(localStorage.getItem("song"));
+   }else{
+      songs = JSON.parse(localStorage.getItem("songs"));
       loadSongs(songs);
    }
 
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     */
    function loadSongs(data) {
       console.log(data);
-      localStorage.setItem("songs", JSON.stringify(data));
+      localStorage.setItem("song", JSON.stringify(data));
 
   }
 

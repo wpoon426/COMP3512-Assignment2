@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
    //added is the playlist array
    const added = [];
    
-   if (!localStorage.getItem("songs")) {
+   if (!localStorage.getItem("song")) {
        const api = "https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php";
        fetch(api)
            .then(res => res.json())
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
            })
       
    }else{
-      songs = JSON.parse(localStorage.getItem("songs"));
+      songs = JSON.parse(localStorage.getItem("song"));
       loadSongs(songs);
    }
 
@@ -57,10 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
    }
 
    //outputs based on title search
-   samp.forEach((song) => {
+   samp.forEach(song => {
       listOutput(song.title, document.querySelector("#titleSearch"));
 
-   });
+   })
 
    //outputs based on artist search
    art.forEach((artist) => {

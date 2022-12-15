@@ -57,10 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
    }
 
    //outputs based on title search
-   samp.forEach(song => {
+   samp.forEach((song) => {
       listOutput(song.title, document.querySelector("#titleSearch"));
 
-   })
+   });
 
    //outputs based on artist search
    art.forEach((artist) => {
